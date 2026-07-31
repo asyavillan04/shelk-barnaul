@@ -1,6 +1,16 @@
 section {
     width: 100%;
-    padding-inline: 5vw;
+}
+
+.grid-container {
+    grid-template-areas: 
+    'images images images'
+    '. about .'
+    '. services .'
+    'reviews reviews reviews'
+    '. tech .'
+    '. contacts .';
+    grid-template-columns: 1fr 80vw 1fr;
 }
 
 /*index page */
@@ -8,8 +18,9 @@ section {
 .images-wrapper {
     position: relative; 
     display: inline-block;
-    padding-inline: 0;
+    grid-area: images;
 }
+
 .images-carousel {
     position: relative;
     outline: 4px solid var(--clr-purple-dark);
@@ -38,4 +49,29 @@ section {
 
 .about {
     justify-content: space-between;
+    grid-area: about;
+}
+
+.services-section {
+    background-color: var(--clr-bg-alt);
+    grid-area: services;
+}
+
+.reviews {
+    grid-column: reviews;
+    grid-template-areas: 
+        '. header .'
+        'content content content';
+    grid-template-columns: 1fr 80vw 1fr;
+}
+.reviews > h2 {
+    grid-area: header;
+}
+
+.tech {
+    grid-area: tech;
+}
+
+.contacts {
+    grid-area: contacts;
 }
