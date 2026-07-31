@@ -1,4 +1,8 @@
 :root {
-    --clr-bg: hsl(259, 64%, 83%);
+    --clr-bg: #ECE3FF;
     --clr-bg-alt: #FFFFFF;
+
+    --clr-purple-dark: #8069A2;
+    --clr-purple: #B398D8;
+    --clr-purple-darkest: #453061;
 }

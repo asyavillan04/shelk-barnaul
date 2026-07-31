@@ -1,0 +1,10 @@
+section {
+    width: 100%;
+}
+
+/*index page */
+.images-carousel {
+    outline: 4px solid var(--clr-purple-dark);
+    width: 100%;
+    height: 60vh;
+}

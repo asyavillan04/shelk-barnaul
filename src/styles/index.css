@@ -1,3 +1,5 @@
 @import './reset.css';
 @import './variables.css';
 @import './globals.css';
+@import './pages.css';
+@import './components.css';
