@@ -92,6 +92,6 @@ body {
     align-items: flex-end;
     justify-content: center;
     background-image: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 20% 100%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 15% 100%);
     padding-left: calc(20% + 2rem); /* 20% соответствует скошенной области, 2rem — отступ */
 }
