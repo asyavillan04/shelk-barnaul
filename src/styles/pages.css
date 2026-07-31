@@ -3,8 +3,24 @@ section {
 }
 
 /*index page */
+
+.images-wrapper {
+    position: relative; 
+    display: inline-block;
+}
 .images-carousel {
     outline: 4px solid var(--clr-purple-dark);
     width: 100%;
     height: 60vh;
+    z-index: 1;
 }
+
+.carousel-controls {
+  position: absolute;
+  bottom: 15px;     
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;    
+  margin: 0;
+}
+
