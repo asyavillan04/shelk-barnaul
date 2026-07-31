@@ -1,6 +1,7 @@
 .btn-appointment {
     background-image: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
     color: var(--clr-bg-alt);
+    padding-inline: 3vw;
 }
 
 .dot-indicators {

@@ -1,5 +1,6 @@
 section {
     width: 100%;
+    padding-inline: 5vw;
 }
 
 /*index page */
@@ -7,6 +8,7 @@ section {
 .images-wrapper {
     position: relative; 
     display: inline-block;
+    padding-inline: 0;
 }
 .images-carousel {
     position: relative;
@@ -34,3 +36,6 @@ section {
   margin: 0;
 }
 
+.about {
+    justify-content: space-between;
+}
