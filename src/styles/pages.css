@@ -55,6 +55,8 @@ section {
 .services-section {
     background-color: var(--clr-bg-alt);
     grid-area: services;
+
+    min-height: 50vh;
 }
 
 .reviews {
@@ -64,6 +66,20 @@ section {
         'content content content';
     grid-template-columns: 1fr 80vw 1fr;
 }
+
+.reviews-carousel{
+    grid-area: content;
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: 0;
+}
+
+.reviews-carousel > * {
+    min-height: 100px;
+    min-width: 80vw;
+    background-color: var(--clr-bg-alt);
+}
+
 .reviews > h2 {
     grid-area: header;
 }
