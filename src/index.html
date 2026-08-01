@@ -20,7 +20,7 @@
         </div>
     </header>
 
-    <main class="grid grid-container grid-container--home">
+    <main class="grid grid-container grid-container--home flow">
         <section class="images-wrapper" aria-label="Фотографии интерьера студии">
 
             <div class="images-carousel flex">
@@ -44,8 +44,40 @@
             <button type="button" class="btn-appointment">Записаться</button>
         </section>
         
-        <section class="services-section">
+        <section class="services flow">
             <h2 class="uppercase">Услуги студии</h2>
+
+            <div class="services-wrapper flex">
+                <div class="services__card">
+                    <p class="service-name flex">Лазерная эпиляция (женщинам)</p>
+                    
+                    <div>
+                    <img src="./assets/services-images/img-lazer.png" alt="">
+                    </div>
+                </div>
+                <div class="services__card">
+                    <p class="service-name flex">Лазерная эпиляция (мужчинам)</p>
+                    
+                    <div>
+                    <img src="./assets/services-images/img-lazer-male.png" alt="">
+                    </div>
+                </div>            
+                <div class="services__card">
+                    <p class="service-name flex">Косметология</p>
+                    
+                    <div>
+                    <img src="./assets/services-images/img-cosm.png" alt="">
+                    </div>
+                </div>
+                <div class="services__card">
+                    <p class="service-name flex">Аппаратная коррекция фигуры</p>
+                    
+                    <div>
+                    <img src="./assets/services-images/img-figure.png" alt="">
+                    </div>
+                </div>
+                        
+            </div>
         </section>
         
         <section class="reviews grid">
@@ -54,6 +86,12 @@
                 <div></div>
                 <div></div>
                 <div></div>
+            </div>
+
+            <div class="reviews-controls dot-indicators" role="tablist" aria-label="Выберите слайд">
+                <button role="tab" aria-selected="true"><span class="sr-only">1</span></button>
+                <button role="tab" aria-selected="false"><span class="sr-only">2</span></button>
+                <button role="tab" aria-selected="false"><span class="sr-only">3</span></button>
             </div>
         </section>
 

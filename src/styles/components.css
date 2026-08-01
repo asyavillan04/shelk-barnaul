@@ -2,6 +2,7 @@
     background-image: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
     color: var(--clr-bg-alt);
     padding-inline: 3vw;
+    border-radius: var(--border-radius);
 }
 
 .dot-indicators {
@@ -16,12 +17,12 @@
     border-radius: 50%;
     padding: .6em;
     background-color: transparent;
-    border: 3px solid var(--clr-purple);
+    border: 3px solid var(--clr-purple-dark);
 }
 
 .dot-indicators > *:hover,
 .dot-indicators > *:focus {
-    background-color: hsl( var(--clr-white) / .5);
+    background-color: var(--clr-purple);
 }
 
 .dot-indicators > [aria-selected="true"] {

@@ -27,7 +27,7 @@ section {
     width: 100%;
     height: 60vh;
     z-index: 1;
-    overflow: hidden;
+    overflow: auto;
     transition: transform 0.3s ease;
     will-change: transform;
 }
@@ -52,18 +52,71 @@ section {
     grid-area: about;
 }
 
-.services-section {
+.services {
     background-color: var(--clr-bg-alt);
     grid-area: services;
+    border-radius: var(--border-radius);
+    padding: 2vw;
 
-    min-height: 50vh;
 }
+.services-wrapper {
+    justify-content: space-evenly;
+    align-items:center;
+}
+.services__card {
+    width: 15vw;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+}
+.services__card > div {
+    width: 100%;
+    height: 100%;
+}
+.services__card > div > img {
+    min-height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+
+    z-index: 1;
+    transition: transform 0.3s ease-in-out;
+}
+
+.services__card > div > img:hover,
+.services__card > div > img:focus {
+    transform: scale(1.1);
+}
+
+.service-name {
+    background-color: var(--clr-bg);
+    height: 3em;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    z-index: 100;
+}
+
+.services__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to bottom, var(--clr-bg) 10%, transparent 100%);
+  pointer-events: none; 
+  z-index: 1;
+  top: 3em;
+}
+
+
 
 .reviews {
     grid-column: reviews;
     grid-template-areas: 
         '. header .'
-        'content content content';
+        'content content content'
+        '. tabs .';
     grid-template-columns: 1fr 80vw 1fr;
 }
 
@@ -76,12 +129,17 @@ section {
 
 .reviews-carousel > * {
     min-height: 100px;
-    min-width: 80vw;
+    min-width: 50vw;
     background-color: var(--clr-bg-alt);
+    border-radius: var(--border-radius);
 }
 
 .reviews > h2 {
     grid-area: header;
+}
+
+.reviews-controls {
+    grid-area: tabs;
 }
 
 .tech {
