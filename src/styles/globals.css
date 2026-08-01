@@ -17,7 +17,7 @@
 }
 
 .flow > * + * {      /*for spacing!*/
-    margin-top: var(--flow-space, 1rem);
+    margin-top: var(--flow-space, 3rem);
 }
 
 .flow--space-small {

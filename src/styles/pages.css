@@ -76,7 +76,9 @@ section {
     height: 100%;
 }
 .services__card > div > img {
-    min-height: 100%;
+    height: 100%;
+    width: 100%;
+    
     object-fit: cover;
     object-position: center bottom;
 
@@ -146,6 +148,6 @@ section {
     grid-area: tech;
 }
 
-.contacts {
+.contact-form {
     grid-area: contacts;
 }
