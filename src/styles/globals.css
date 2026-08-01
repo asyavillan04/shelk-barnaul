@@ -74,6 +74,7 @@
 body {
     background-color: var(--clr-bg);
     color: var(--clr-purple-darkest);
+    font-size: 1.2em;
 }
 
 .main-header {

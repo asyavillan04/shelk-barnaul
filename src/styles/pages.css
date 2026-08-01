@@ -96,6 +96,7 @@ section {
     height: 3em;
     align-items: center;
     justify-content: center;
+    padding-inline: 1em;
 
     position: relative;
     z-index: 100;
