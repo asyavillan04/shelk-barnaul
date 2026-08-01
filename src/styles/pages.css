@@ -148,6 +148,137 @@ section {
     grid-area: tech;
 }
 
-.contact-form {
+.contacts {
     grid-area: contacts;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.contact-form {
+    background-color: transparent;
+}
+
+.form-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+@media (max-width: 640px) {
+    .form-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-group {
+    background-color: var(--clr-bg-alt);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+    color: var(--clr-text);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.6em;
+    border: 1px solid var(--clr-border, #ccc);
+    border-radius: calc(var(--border-radius) / 2);
+    font-family: inherit;
+    background-color: #fff;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--clr-purple);
+    outline: none;
+}
+
+.form-group--checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    background: none;
+    padding: 0;
+    box-shadow: none;
+}
+
+.form-group--checkbox input[type="checkbox"] {
+    width: auto;
+    margin-top: 0.2em;
+}
+
+.submit-btn {
+    background-color: var(--clr-purple);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.75em 2em;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+}
+
+.submit-btn:hover {
+    background-color: var(--clr-purple-dark);
+}
+
+.error-message {
+    color: #d00;
+    font-size: 0.85rem;
+    display: none;
+}
+
+.form-feedback {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: green;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
 }

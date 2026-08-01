@@ -99,57 +99,62 @@
         <h2 class="uppercase">Оборудование</h2>
         </section>
 
-    <section class="contact-form" aria-labelledby="contact-heading">
+    <section class="contacts" aria-labelledby="contact-heading">
     <h2 id="contact-heading" class="uppercase">Контакты</h2>
+
     <form id="contact-form" class="contact-form" novalidate>
-        <div class="form-group">
-        <label for="phone">Телефон</label>
-        <input type="tel" id="phone" name="phone" placeholder="+7 900 000-00-00">
-        <span class="error-message" id="phone-error"></span>
-        </div>
+        <div class="form-columns">
+            <div class="form-column form-column--contacts">
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+7 900 000-00-00">
+                    <span class="error-message" id="phone-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="example@mail.ru">
+                    <span class="error-message" id="email-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="social">Соцсеть</label>
+                    <select id="social" name="social">
+                        <option value="">-- Выберите --</option>
+                        <option value="telegram">Telegram</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="vk">ВКонтакте</option>
+                    </select>
+                    <input type="text" id="social-contact" name="social-contact" placeholder="Ваш ник или номер">
+                    <span class="error-message" id="social-error"></span>
+                </div>
+            </div>
 
-        <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="example@mail.ru">
-        <span class="error-message" id="email-error"></span>
+            <div class="form-column form-column--message">
+                <div class="form-group">
+                    <label for="message">Комментарий</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Ваш вопрос или пожелание"></textarea>
+                </div>
+                <div class="form-group form-group--checkbox">
+                    <input type="checkbox" id="consent" name="consent" required>
+                    <label for="consent">Я согласен(на) на обработку <a href="#" id="open-policy">персональных данных</a></label>
+                    <span class="error-message" id="consent-error"></span>
+                </div>
+                <button type="submit" class="submit-btn">Отправить</button>
+                <div id="form-feedback" class="form-feedback" role="status"></div>
+            </div>
         </div>
-
-        <div class="form-group">
-        <label for="social">Соцсеть</label>
-        <select id="social" name="social">
-            <option value="">-- Выберите --</option>
-            <option value="telegram">Telegram</option>
-            <option value="whatsapp">WhatsApp</option>
-            <option value="vk">ВКонтакте</option>
-        </select>
-        <input type="text" id="social-contact" name="social-contact" placeholder="Ваш ник или номер">
-        <span class="error-message" id="social-error"></span>
-        </div>
-
-        <div class="form-group">
-        <label for="message">Комментарий</label>
-        <textarea id="message" name="message" rows="4" placeholder="Ваш вопрос или пожелание"></textarea>
-        </div>
-
-        <div class="form-group form-group--checkbox">
-        <input type="checkbox" id="consent" name="consent" required>
-        <label for="consent">Я согласен(на) на обработку <a href="#" id="open-policy">персональных данных</a></label>
-        <span class="error-message" id="consent-error"></span>
-        </div>
-
-        <button type="submit" class="submit-btn">Отправить</button>
-        <div id="form-feedback" class="form-feedback" role="status"></div>
     </form>
-    </section>
 
-    <!-- Модальное окно политики -->
-    <div id="policy-modal" class="modal" role="dialog" aria-labelledby="policy-title" hidden>
-    <div class="modal-content">
-        <h3 id="policy-title">Политика обработки персональных данных</h3>
-        <p>Текст согласия...</p>
-        <button id="close-modal">Закрыть</button>
+    <!-- Модальное окно с политикой -->
+    <div class="modal" id="policy-modal" role="dialog" aria-modal="true" aria-labelledby="policy-title">
+        <div class="modal-content">
+            <button type="button" class="modal-close" aria-label="Закрыть">&times;</button>
+            <h3 id="policy-title">Политика обработки персональных данных</h3>
+            <div class="policy-text">
+                <p>Ваши персональные данные (имя, контактная информация) обрабатываются исключительно с целью связи с вами и не передаются третьим лицам. Нажимая кнопку «Отправить», вы даёте согласие на обработку указанных данных.</p>
+            </div>
+        </div>
     </div>
-    </div>
+</section>
 
     </main>
 
