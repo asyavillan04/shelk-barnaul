@@ -326,6 +326,16 @@ section {
     cursor: pointer;
 }
 
+.pricelist > div {
+    display: grid;
+    grid-template-columns: 1fr 40vw 40vw 1fr;
+}
+
+.pricelist > div > h2,
+.pricelist > div > h3 {
+    grid-column: 2 / 3;
+}
+
 .service-line {
     grid-template-columns: 1fr 40vw 40vw 1fr;
 }
