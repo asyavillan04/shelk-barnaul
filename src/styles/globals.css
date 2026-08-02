@@ -83,12 +83,14 @@ body {
     grid-template-columns: 2fr 3fr;
     grid-template-areas: 'empty info';
     background-color: white;
+    position: relative;  /* если ещё не задано */
+    z-index: 0;
 }
 
 .main-header > *{
     display: flex;
     flex: 1;
-    height: 200px;
+    padding: 2em;
 }
 
 .main-header div:first-child {
@@ -101,6 +103,8 @@ body {
     justify-content: center;
     background-image: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
     color: var(--clr-bg-alt);
+    position: relative;
+    z-index: 10;
 }
 
 @media (min-width: 35em) {

@@ -28,3 +28,13 @@
 .dot-indicators > [aria-selected="true"] {
     background-color: var(--clr-purple-darkest); 
 }
+
+.reviews-carousel,
+.images-carousel {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.reviews-carousel::-webkit-scrollbar,
+.images-carousel::-webkit-scrollbar {
+  display: none;
+}
