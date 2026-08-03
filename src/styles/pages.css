@@ -2,15 +2,57 @@ section {
     width: 100%;
 }
 
-.grid-container {
+/* Базовая сетка */
+.grid-container--home {
     grid-template-areas: 
-    'images images images'
-    '. about .'
-    '. services .'
-    'reviews reviews reviews'
-    '. tech .'
-    '. contacts .';
-    grid-template-columns: 1fr 80vw 1fr;
+        ". btn ."
+        "images images images"
+        ". about ."
+        ". services ."
+        "reviews reviews reviews"
+        ". tech ."
+        ". contacts .";
+    grid-template-columns: 1fr 90vw 1fr;
+}
+
+.btn-appointment {
+    display: block;
+    margin: 0 auto 2rem; 
+    justify-self: center;
+    align-self: center;
+    grid-area: btn;
+    position: relative;
+    z-index: 100;
+}
+
+@media (min-width: 35em) {
+    .btn-appointment {
+        justify-self: end;
+    }
+}
+
+@media (min-width: 45em) {
+    .grid-container--home {
+        grid-template-areas: 
+            "images images images images"
+            ". about btn ."
+            ". services services ."
+            "reviews reviews reviews reviews"
+            ". tech tech ."
+            ". contacts contacts .";
+        grid-template-columns: 1fr 40vw 40vw 1fr;
+    }
+
+    .about {
+        grid-area: about;
+        justify-content: flex-start; 
+    }
+
+    .btn-appointment {
+        justify-self: end; 
+        align-self: center;  
+        margin: 0;
+    }
 }
 
 /*index page */
@@ -22,6 +64,7 @@ section {
     display: inline-block;
     grid-area: images;
 }
+
 
 .images-carousel {
     position: relative;
@@ -212,9 +255,6 @@ section {
 /* Обратная связь      */
 /* ------------------- */
 
-/* =================== */
-/*  Mobile first       */
-/* =================== */
 .contacts {
     grid-area: contacts;
     width: 100%;
@@ -298,7 +338,7 @@ section {
     cursor: pointer;
     font-size: 1rem;
     transition: background 0.2s;
-    width: 100%;
+    width: 50%;
 }
 
 .submit-btn:hover {
@@ -322,7 +362,7 @@ section {
 /* =================== */
 @media (min-width: 45em) {
     .contacts {
-        margin: 0;            /* убираем центрирование */
+        margin: 0;
         padding: 0;
     }
 
@@ -345,7 +385,6 @@ section {
         flex: 1;
     }
 
-    /* Чтобы поле комментария было такой же ширины, как телефон + кнопка */
     .form-row--message .form-group {
         flex: 1;
     }
@@ -387,7 +426,6 @@ section {
     cursor: pointer;
 }
 
-/* Контактные карточки – mobile‑first */
 .contact-cards {
   display: flex;
   flex-direction: column;
@@ -397,20 +435,18 @@ section {
 
 .contact-card {
   display: grid;
-  grid-template-columns: auto 1fr;   /* иконка | информация */
+  grid-template-columns: auto 1fr; 
   gap: 1rem;
   align-items: center;
   /* фон убран */
   border-radius: var(--border-radius);
   padding: 1rem;
-  box-shadow: none;                 /* тень тоже можно убрать, если не нужна */
+  box-shadow: none;
 }
 
-/* Иконка растягивается на обе строки */
 .contact-card-icon {
   grid-row: 1 / -1;
   align-self: center;
-  /* размеры заданы в HTML, можно переопределить */
 }
 
 .contact-card-info {
@@ -456,15 +492,12 @@ section {
   background: var(--clr-purple-dark);
 }
 
-.copy-btn {
-  min-width: 2em; /* чтобы кнопка К не была слишком узкой */
-}
+
 
 .copy-btn.copied {
-  background: green;
+  background: rgb(91, 145, 77);
 }
 
-/* Десктоп (≥45em) – три колонки */
 @media (min-width: 45em) {
   .contact-cards {
     display: grid;
@@ -473,6 +506,9 @@ section {
   }
 }
 
+/* -------------------------- */
+/* Страницы прайса            */
+/* -------------------------- */
 
 .pricelist > div {
     display: grid;
