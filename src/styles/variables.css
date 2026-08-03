@@ -7,4 +7,10 @@
     --clr-purple-darkest: #453061;
 
     --border-radius: 1em;
+    --color-bg-alt-hsl: 0, 0%, 100%;
+
+    --h: 0; 
+    --s: 0%;
+    --l: 100%;
+    --color-bg-alt: hsl(var(--h), var(--s), var(--l));
 }

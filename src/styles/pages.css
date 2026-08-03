@@ -559,6 +559,12 @@ section {
 /* Страницы прайса            */
 /* -------------------------- */
 
+.lazer-page {
+    background-image: url('../assets/decorations/lavender-bg.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: bottom; 
+}
 .pricelist > div {
     display: grid;
     grid-template-columns: 1fr 40vw 40vw 1fr;
@@ -569,8 +575,23 @@ section {
     grid-column: 2 / 3;
 }
 
+.pricelist > div > h2 {
+    padding: 0.5em 0;
+}
+
+.pricelist-heading {
+    background-image: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
+    color: var(--clr-bg-alt);
+    padding: 1em 0;
+}
+
 .service-line {
     grid-template-columns: 1fr 40vw 40vw 1fr;
+    background: linear-gradient(
+    to right,
+    hsl(var(--h), var(--s), var(--l), 0.8) 0%,      /* 100% непрозрачность */
+    hsla(var(--h), var(--s), var(--l), 0.2) 100%); /* 50% непрозрачность */
+    padding: 0.7em 0;
 }
 .service-line p:first-child {
     grid-column: 2 / 3;

@@ -92,7 +92,7 @@ body {
 }
 
 .main-header div:first-child {
-    /* левая пустая белая панель */
+
 }
 
 .main-header div:last-child {
@@ -109,29 +109,26 @@ body {
     list-style-type: none;
 }
 
-/* Планшет (35em) – правая часть 80% */
 @media (min-width: 35em) {
     .main-header {
         flex-direction: row;
     }
     .main-header div:first-child {
-        flex: 0 0 10%;          /* левая часть фиксированно 20% */
+        flex: 0 0 10%;
         padding: 0;
     }
     .main-header div:last-child {
-        flex: 1 1 90%;          /* правая часть 80% */
+        flex: 1 1 90%; 
         clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 15% 100%);
         padding-left: calc(20% + 2rem);
     }
 }
 
-/* Десктоп (45em) – правая часть 50% */
 @media (min-width: 45em) {
     .main-header div:first-child {
-        flex: 0 0 30%;          /* левая часть 50% */
+        flex: 0 0 30%; 
     }
     .main-header div:last-child {
-        flex: 1 1 70%;          /* правая часть 50% */
-        /* clip-path и padding можно оставить или скорректировать под новое соотношение */
+        flex: 1 1 70%;  
     }
 }
