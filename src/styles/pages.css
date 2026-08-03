@@ -153,7 +153,7 @@ section {
     background-color: var(--clr-bg-alt);
     grid-area: services;
     border-radius: var(--border-radius);
-    padding: 2vw;
+    padding: 2em;
 }
 
 /* По умолчанию – колонка (mobile) */
@@ -289,10 +289,19 @@ section {
 .reviews-controls {
     grid-area: tabs;
 }
+
+/* ------------------- */
+/* Про оборудование    */
+/* ------------------- */
 .tech {
     grid-area: tech;
+    flex-direction: column;
 }
-
+@media (min-width: 45em) {
+    .tech {
+        width: 50%;
+    }
+}
 
 /* ------------------- */
 /* Обратная связь      */
@@ -400,9 +409,6 @@ section {
     color: green;
 }
 
-/* =================== */
-/*  Desktop (≥ 45em)   */
-/* =================== */
 @media (min-width: 45em) {
     .contacts {
         margin: 0;
