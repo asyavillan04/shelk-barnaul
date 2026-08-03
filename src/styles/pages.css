@@ -59,6 +59,13 @@ section {
 /* ------------------------------- */
 /* Начальные изображения (карусель)*/
 /* -------------------------------- */
+
+.carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+    outline: 4px solid var(--clr-purple-dark);
+}
+
 .images-wrapper {
     position: relative; 
     display: inline-block;
@@ -68,24 +75,43 @@ section {
 
 .images-carousel {
     position: relative;
-    outline: 4px solid var(--clr-purple-dark);
+    
     width: 100%;
-    height: 60vh;
+    height: 20vh;
     z-index: 1;
-    overflow: auto;
-    scrollbar-width: none;
-  /* Для Internet Explorer / Edge*/
-    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+
     transition: transform 0.3s ease;
     will-change: transform;
 }
 
+@media (min-width: 35em) {
+    .images-carousel {
+        height: 50vh;
+    }
+}
+
+@media (min-width: 45em) {
+    .images-carousel {
+        height: 60vh;
+    }
+}
+
 .images-carousel > * {
     flex: 0 0 80vw;
-    min-width: 80vw;
+    width: 80vw;
     height: auto;
-    object-fit: cover
+    object-fit: cover;
+    transition: opacity 0.3s ease;
 }
+.images-carousel .prev,
+.images-carousel .next {
+    opacity: 0.5;
+}
+.images-carousel .active {
+    opacity: 1;
+}
+
 .carousel-controls {
   position: absolute;
   bottom: 15px;     
@@ -95,10 +121,10 @@ section {
   margin: 0;
 }
 
-.images-wrapper::before {
+ .images-wrapper::before {
   content: '';
   position: absolute;
-  top: -300px;
+  top: -304px;
   left: 0;
   width: 100%;
   height: 300px;
@@ -109,7 +135,7 @@ section {
   z-index: 1; 
   pointer-events: none;
   padding-inline: 2em;
-}
+} 
 
 /* ------------------- */
 /* О студии            */
