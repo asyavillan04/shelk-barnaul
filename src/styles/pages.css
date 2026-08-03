@@ -81,7 +81,7 @@ section {
     z-index: 1;
     scroll-behavior: smooth;
 
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
     will-change: transform;
 }
 
@@ -102,11 +102,12 @@ section {
     width: 80vw;
     height: auto;
     object-fit: cover;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.8s ease;
 }
 .images-carousel .prev,
 .images-carousel .next {
     opacity: 0.5;
+    transition: opacity 0.8s ease;
 }
 .images-carousel .active {
     opacity: 1;

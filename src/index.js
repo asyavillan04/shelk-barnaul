@@ -80,6 +80,7 @@ document.querySelectorAll('.copy-btn').forEach(btn => {
 });
 
 // --- Карусель ---
+
 const carouselTrack = document.querySelector('.images-carousel');
 const carouselViewport = document.querySelector('.carousel-viewport');
 const indicatorsContainer = document.querySelector('.dot-indicators');
@@ -93,7 +94,6 @@ const imageSources = [
 const totalSlides = imageSources.length;
 
 if (carouselTrack && totalSlides) {
-    // Очищаем
     carouselTrack.innerHTML = '';
     indicatorsContainer.innerHTML = '';
 
@@ -124,9 +124,9 @@ if (carouselTrack && totalSlides) {
 
     const allSlides = [...carouselTrack.children];
     const indicators = [...indicatorsContainer.children];
-    let currentIndex = 1;        // в массиве allSlides (реальный первый = индекс 1)
+    let currentIndex = 1;        // индекс в allSlides, начинаем с реального первого (позиция 1)
     let isTransitioning = false;
-    let step = 0;                // ширина слайда + gap
+    let step = 0;
     let viewportWidth = 0;
     let slideWidth = 0;
 
@@ -134,18 +134,39 @@ if (carouselTrack && totalSlides) {
     function updateSizes() {
         if (!carouselViewport || allSlides.length < 2) return;
         viewportWidth = carouselViewport.offsetWidth;
-        const firstSlide = allSlides[0];
-        const secondSlide = allSlides[1];
-        slideWidth = firstSlide.offsetWidth;
-        step = secondSlide.getBoundingClientRect().left - firstSlide.getBoundingClientRect().left;
+        slideWidth = allSlides[0].offsetWidth;
+        step = allSlides[1].getBoundingClientRect().left - allSlides[0].getBoundingClientRect().left;
     }
 
-    // Центрируем слайд с индексом в полном массиве
+    // Центрирование слайда с индексом в полном массиве
     function centerSlide(index) {
         updateSizes();
         if (step === 0) return;
-        const offset = (viewportWidth - slideWidth) / 2; // отступ слева, чтобы слайд был по центру
+        const offset = (viewportWidth - slideWidth) / 2;
         carouselTrack.style.transform = `translateX(${-step * index + offset}px)`;
+    }
+
+    // Обновление классов прозрачности и индикаторов на основе текущего реального индекса
+    function updateActiveClasses() {
+        const realActive = (currentIndex - 1 + totalSlides) % totalSlides;
+
+        // Проставляем классы active/prev/next на все слайды
+        allSlides.forEach(slide => {
+            slide.classList.remove('active', 'prev', 'next');
+            const slideRealIndex = parseInt(slide.dataset.index, 10);
+            if (slideRealIndex === realActive) {
+                slide.classList.add('active');
+            } else if (slideRealIndex === (realActive - 1 + totalSlides) % totalSlides) {
+                slide.classList.add('prev');
+            } else if (slideRealIndex === (realActive + 1) % totalSlides) {
+                slide.classList.add('next');
+            }
+        });
+
+        // Обновляем точки
+        indicators.forEach((btn, i) => {
+            btn.setAttribute('aria-selected', i === realActive ? 'true' : 'false');
+        });
     }
 
     function goToSlide(index) {
@@ -156,46 +177,42 @@ if (carouselTrack && totalSlides) {
             isTransitioning = false;
             return;
         }
-        carouselTrack.style.transition = 'transform 0.4s ease';
+
+        // Запускаем движение
+        carouselTrack.style.transition = 'transform 0.3s ease'; // должно совпадать с CSS
         centerSlide(index);
         currentIndex = index;
+
+        // Сразу же обновляем прозрачность (классы active/prev/next)
+        updateActiveClasses();
     }
 
     function goToRealIndex(realIndex) {
-        // в полном массиве реальный слайд на позиции realIndex + 1
-        goToSlide(realIndex + 1);
+        goToSlide(realIndex + 1);   // в полном массиве реальный слайд на позиции realIndex+1
     }
 
     // Бесшовный прыжок после завершения анимации
     carouselTrack.addEventListener('transitionend', () => {
         isTransitioning = false;
         const totalAll = allSlides.length;
+
         // На клоне последнего (индекс 0) → прыгаем на реальный последний (totalAll-2)
         if (currentIndex === 0) {
             carouselTrack.style.transition = 'none';
             currentIndex = totalAll - 2;
             centerSlide(currentIndex);
+            updateActiveClasses();   // синхронизируем после мгновенного скачка
         }
         // На клоне первого (индекс totalAll-1) → прыгаем на реальный первый (1)
         else if (currentIndex === totalAll - 1) {
             carouselTrack.style.transition = 'none';
             currentIndex = 1;
             centerSlide(currentIndex);
+            updateActiveClasses();
         }
-        // Обновляем точки
-        const realActive = (currentIndex - 1 + totalSlides) % totalSlides;
-        indicators.forEach((btn, i) => {
-            const isActive = i === realActive;
-            btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        });
-
-        allSlides.forEach(s => s.classList.remove('active','prev','next'));
-        allSlides[currentIndex].classList.add('active');
-        if (currentIndex > 0) allSlides[currentIndex-1].classList.add('prev');
-        if (currentIndex < totalAll-1) allSlides[currentIndex+1].classList.add('next');
     });
 
-    // Клик по слайду – переключает на тот, по которому кликнули
+    // Клик по слайду
     carouselTrack.addEventListener('click', (e) => {
         const img = e.target.closest('img');
         if (!img) return;
@@ -210,10 +227,10 @@ if (carouselTrack && totalSlides) {
     function initCarousel() {
         updateSizes();
         if (step === 0) return;
-        currentIndex = 1; // реальный первый
+        currentIndex = 1;   // реальный первый
         carouselTrack.style.transition = 'none';
         centerSlide(currentIndex);
-        indicators.forEach((btn, i) => btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false'));
+        updateActiveClasses();
     }
 
     window.addEventListener('load', initCarousel);
