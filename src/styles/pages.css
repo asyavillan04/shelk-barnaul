@@ -231,11 +231,21 @@ section {
     scrollbar-width: 0;
 }
 
-.reviews-carousel > * {
+.reviews-carousel > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
     min-height: 100px;
     min-width: 50vw;
     background-color: var(--clr-bg-alt);
     border-radius: var(--border-radius);
+}
+
+.reviews-carousel > div > img {
+    width: 60%;
+    align-self: center;
+    border-radius: 10px;
 }
 
 .reviews > h2 {
