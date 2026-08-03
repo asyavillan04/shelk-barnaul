@@ -87,9 +87,10 @@ const indicatorsContainer = document.querySelector('.dot-indicators');
 
 // Исходные изображения
 const imageSources = [
-    './assets/home-images/studio-photo.png',
-    './assets/home-images/studio-photo.png',
-    './assets/home-images/studio-photo.png'
+    './assets/home-images/home-1.jpeg',
+    './assets/home-images/home-2.jpeg',
+    './assets/home-images/home-3.jpg',
+    './assets/home-images/home-4.jpg',
 ];
 const totalSlides = imageSources.length;
 
@@ -253,5 +254,162 @@ if (carouselTrack && totalSlides) {
     }
     carouselViewport?.addEventListener('mouseenter', stopAutoplay);
     carouselViewport?.addEventListener('mouseleave', startAutoplay);
+    startAutoplay();
+}
+
+// --- Карусель отзывов (бесконечная, без прозрачности) ---
+const reviewsTrack = document.querySelector('.reviews-carousel');
+const reviewsViewport = document.querySelector('.reviews-carousel-wrapper');
+const reviewsIndicatorsContainer = document.querySelector('.reviews-controls.dot-indicators');
+
+// Исходные изображения
+const reviewImages = [
+    'assets/reviews/review-1.jpg',
+    'assets/reviews/review-2.jpg',
+    'assets/reviews/review-3.jpg',
+    'assets/reviews/review-4.jpg',
+    'assets/reviews/review-5.jpg',
+    'assets/reviews/review-6.jpg'
+];
+const totalReviews = reviewImages.length;
+
+if (reviewsTrack && totalReviews) {
+    reviewsTrack.innerHTML = '';
+    reviewsIndicatorsContainer.innerHTML = '';
+
+    // Создаём слайд
+    function createReviewSlide(src, realIndex) {
+        const div = document.createElement('div');
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = '';
+        div.dataset.index = realIndex;
+        div.appendChild(img);
+        return div;
+    }
+
+    // Трек: [клон последнего, 0, 1, 2, ..., 5, клон первого]
+    const lastClone = createReviewSlide(reviewImages[totalReviews - 1], totalReviews - 1);
+    const firstClone = createReviewSlide(reviewImages[0], 0);
+    reviewsTrack.appendChild(lastClone);
+    reviewImages.forEach((src, idx) => reviewsTrack.appendChild(createReviewSlide(src, idx)));
+    reviewsTrack.appendChild(firstClone);
+
+    // Точки
+    for (let i = 0; i < totalReviews; i++) {
+        const btn = document.createElement('button');
+        btn.setAttribute('role', 'tab');
+        btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+        btn.innerHTML = `<span class="sr-only">${i + 1}</span>`;
+        btn.addEventListener('click', () => goToRealIndex(i));
+        reviewsIndicatorsContainer.appendChild(btn);
+    }
+
+    const allSlides = [...reviewsTrack.children];
+    const indicators = [...reviewsIndicatorsContainer.children];
+    let currentIndex = 1;      // реальный первый (индекс 1)
+    let isTransitioning = false;
+    let step = 0;
+    let viewportWidth = 0;
+    let slideWidth = 0;
+
+    function updateSizes() {
+        if (!reviewsViewport || allSlides.length < 2) return;
+        viewportWidth = reviewsViewport.offsetWidth;
+        slideWidth = allSlides[0].offsetWidth;
+        step = allSlides[1].getBoundingClientRect().left - allSlides[0].getBoundingClientRect().left;
+    }
+
+    function centerSlide(index) {
+        updateSizes();
+        if (step === 0) return;
+        const offset = (viewportWidth - slideWidth) / 2;
+        reviewsTrack.style.transform = `translateX(${-step * index + offset}px)`;
+    }
+
+    function goToSlide(index) {
+        if (isTransitioning || index === currentIndex) return;
+        isTransitioning = true;
+        updateSizes();
+        if (step === 0) {
+            isTransitioning = false;
+            return;
+        }
+        reviewsTrack.style.transition = 'transform 0.4s ease';
+        centerSlide(index);
+        currentIndex = index;
+        updateIndicators();
+    }
+
+    function goToRealIndex(realIndex) {
+        goToSlide(realIndex + 1);
+    }
+
+    // Обновление только точек
+    function updateIndicators() {
+        const realActive = (currentIndex - 1 + totalReviews) % totalReviews;
+        indicators.forEach((btn, i) => {
+            btn.setAttribute('aria-selected', i === realActive ? 'true' : 'false');
+        });
+    }
+
+    // Бесшовный прыжок
+    reviewsTrack.addEventListener('transitionend', () => {
+        isTransitioning = false;
+        const totalAll = allSlides.length;
+        if (currentIndex === 0) {
+            reviewsTrack.style.transition = 'none';
+            currentIndex = totalAll - 2;
+            centerSlide(currentIndex);
+            updateIndicators();
+        } else if (currentIndex === totalAll - 1) {
+            reviewsTrack.style.transition = 'none';
+            currentIndex = 1;
+            centerSlide(currentIndex);
+            updateIndicators();
+        }
+    });
+
+    // Клик по слайду — переход на тот, по которому кликнули
+    reviewsTrack.addEventListener('click', (e) => {
+        const slide = e.target.closest('div[data-index]');
+        if (!slide) return;
+        const clickedRealIndex = parseInt(slide.dataset.index, 10);
+        const currentReal = (currentIndex - 1 + totalReviews) % totalReviews;
+        if (clickedRealIndex !== currentReal) {
+            goToRealIndex(clickedRealIndex);
+        }
+    });
+
+    // Инициализация
+    function initReviewsCarousel() {
+        updateSizes();
+        if (step === 0) return;
+        currentIndex = 1;
+        reviewsTrack.style.transition = 'none';
+        centerSlide(currentIndex);
+        updateIndicators();
+    }
+
+    window.addEventListener('load', initReviewsCarousel);
+    if (document.readyState === 'complete') initReviewsCarousel();
+
+    // Ресайз
+    window.addEventListener('resize', () => {
+        updateSizes();
+        reviewsTrack.style.transition = 'none';
+        centerSlide(currentIndex);
+    });
+
+    // Автоплей
+    let autoplay;
+    function startAutoplay() {
+        autoplay = setInterval(() => goToSlide(currentIndex + 1), 5000);
+    }
+    function stopAutoplay() {
+        clearInterval(autoplay);
+    }
+    reviewsViewport?.addEventListener('mouseenter', stopAutoplay);
+    reviewsViewport?.addEventListener('mouseleave', startAutoplay);
     startAutoplay();
 }

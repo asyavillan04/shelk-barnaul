@@ -251,38 +251,44 @@ section {
     grid-template-columns: 1fr 80vw 1fr;
 }
 
-.reviews-carousel{
+.reviews-carousel-wrapper {
     grid-area: content;
+    overflow: hidden;
     width: 100%;
-    overflow-x: auto;
-    scrollbar-width: 0;
+}
+
+.reviews-carousel {
+    display: flex;
+    gap: 10px;
+    transition: transform 0.4s ease;
+    will-change: transform;
 }
 
 .reviews-carousel > div {
+    flex: 0 0 50vw;  
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2em;
     min-height: 100px;
-    min-width: 50vw;
     background-color: var(--clr-bg-alt);
     border-radius: var(--border-radius);
+    box-sizing: border-box;
 }
 
 .reviews-carousel > div > img {
     width: 60%;
     align-self: center;
     border-radius: 10px;
+    pointer-events: none; 
 }
 
 .reviews > h2 {
     grid-area: header;
 }
-
 .reviews-controls {
     grid-area: tabs;
 }
-
 .tech {
     grid-area: tech;
 }
