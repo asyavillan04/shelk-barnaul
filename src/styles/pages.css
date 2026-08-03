@@ -91,15 +91,15 @@ section {
     align-items:center;
 }
 .services__card-link {
-    display: block;                     /* ссылка на всю карточку */
+    display: block;    
     width: 15vw;
     aspect-ratio: 4 / 5;
     border-radius: var(--border-radius);
     overflow: hidden;
     text-align: center;
     position: relative;
-    text-decoration: none;              /* убираем подчёркивание */
-    color: inherit;                     /* наследует цвет текста */
+    text-decoration: none;       
+    color: inherit;                    
 }
 
 .services__card-image {
@@ -306,7 +306,7 @@ section {
 }
 
 .modal-content {
-    background: #fff;
+    background: var(--clr-bg-alt);
     border-radius: var(--border-radius);
     padding: 2rem;
     max-width: 500px;
