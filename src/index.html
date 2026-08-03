@@ -110,11 +110,68 @@
 <section class="contacts flow" aria-labelledby="contact-heading">
     <h2 id="contact-heading" class="uppercase">Контакты</h2>
     <p>Соцсети студии</p>
-    <ul class="flex">
-        <li><a href="#"><img src="assets/social/558022.svg" alt="Написать в Макс" width="32" height="32"></a></li>
-        <li><a href="#"><img src="assets/social/logo-vk.svg" alt="Написать в ВКонтакте" width="46" height="32"></a></li>
-        <li><a href="#"><img src="assets/social/logo_max.svg" alt="Написать в Макс" width="32" height="32"></a></li>
-    </ul>
+<div class="contact-cards">
+  <!-- Телефон -->
+  <div class="contact-card">
+    <img src="assets/social/558022.svg" alt="Телефон" width="48" height="48" class="contact-card-icon">
+    <div class="contact-card-info">
+      <div class="contact-card-row">
+        <a href="tel:+79000000000" class="contact-card-btn">Позвонить</a>
+      </div>
+      <div class="contact-card-row">
+        <span class="contact-card-id" id="phone-id">+7 (900) 000-00-00</span>
+        <button class="contact-card-btn copy-btn" data-target="phone-id">К</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ВКонтакте -->
+  <div class="contact-card">
+    <img src="assets/social/logo-vk.svg" alt="ВКонтакте" width="48" height="48" class="contact-card-icon">
+    <div class="contact-card-info">
+      <div class="contact-card-row">
+        <a href="https://vk.com/студия_шёлк" target="_blank" rel="noopener noreferrer" class="contact-card-btn">Перейти в ВК</a>
+      </div>
+      <div class="contact-card-row">
+        <span class="contact-card-id" id="vk-id">vk.com/студия_шёлк</span>
+        <button class="contact-card-btn copy-btn" data-target="vk-id">К</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Макс (Telegram) -->
+  <div class="contact-card">
+    <img src="assets/social/logo_max.svg" alt="Telegram" width="48" height="48" class="contact-card-icon">
+    <div class="contact-card-info">
+      <div class="contact-card-row">
+        <a href="https://t.me/max_studio" target="_blank" rel="noopener noreferrer" class="contact-card-btn">Перейти в Макс</a>
+      </div>
+      <div class="contact-card-row">
+        <span class="contact-card-id" id="max-id">@max_studio</span>
+        <button class="contact-card-btn copy-btn" data-target="max-id">К</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Копирование ID
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.target;
+      const text = document.getElementById(targetId)?.textContent.trim();
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'К';
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => console.error('Ошибка копирования:', err));
+    });
+  });
+</script>
     <form id="contact-form" class="contact-form" novalidate>
         <div class="form-columns">
             <div class="form-column form-column--contacts">
