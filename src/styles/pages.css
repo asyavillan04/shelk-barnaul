@@ -23,6 +23,7 @@ section {
     grid-area: btn;
     position: relative;
     z-index: 100;
+    box-shadow: var(--shadow);
 }
 
 @media (min-width: 35em) {
@@ -64,6 +65,7 @@ section {
     overflow: hidden;
     width: 100%;
     outline: 4px solid var(--clr-purple-dark);
+    box-shadow: var(--shadow);
 }
 
 .images-wrapper {
@@ -122,21 +124,21 @@ section {
   margin: 0;
 }
 
- .images-wrapper::before {
-  content: '';
-  position: absolute;
-  top: -304px;
-  left: 0;
-  width: 100%;
-  height: 300px;
-  background-image: url('../assets/decorations/lavender-header-desktop.png');
-  background-size: auto 100%;  
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  z-index: 1; 
-  pointer-events: none;
-  padding-inline: 2em;
-} 
+
+header > div:first-child::after {
+    content: '';
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    background-image: url('../assets/decorations/lavender-header-desktop.png');
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    z-index: 1;
+    pointer-events: none;
+}
 
 /* ------------------- */
 /* О студии            */
@@ -154,6 +156,7 @@ section {
     grid-area: services;
     border-radius: var(--border-radius);
     padding: 2em;
+    box-shadow: var(--shadow);
 }
 
 /* По умолчанию – колонка (mobile) */
@@ -253,7 +256,7 @@ section {
 
 .reviews-carousel-wrapper {
     grid-area: content;
-    overflow: hidden;
+    overflow-x: hidden;
     width: 100%;
 }
 
@@ -274,6 +277,7 @@ section {
     background-color: var(--clr-bg-alt);
     border-radius: var(--border-radius);
     box-sizing: border-box;
+    box-shadow: var(--shadow);
 }
 
 .reviews-carousel > div > img {
@@ -559,13 +563,35 @@ section {
 /* Страницы прайса            */
 /* -------------------------- */
 
-.lazer-page {
-    background-image: url('../assets/decorations/lavender-bg.png');
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position: bottom; 
+.pricelist {
+    padding-top: 2rem;
 }
-.pricelist > div {
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    z-index: -1;
+    background-image: url('../assets/decorations/lavender-watercolor.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    will-change: transform;
+}
+
+.warnings {
+    background-color: var(--clr-bg-alt);
+    border-radius: var(--border-radius);
+    width: max-content;
+    margin: auto 0;
+}
+
+.pricelist-heading,
+.service-line {
     display: grid;
     grid-template-columns: 1fr 40vw 40vw 1fr;
 }
@@ -589,8 +615,8 @@ section {
     grid-template-columns: 1fr 40vw 40vw 1fr;
     background: linear-gradient(
     to right,
-    hsl(var(--h), var(--s), var(--l), 0.8) 0%,      /* 100% непрозрачность */
-    hsla(var(--h), var(--s), var(--l), 0.2) 100%); /* 50% непрозрачность */
+    hsl(var(--h), var(--s), var(--l), 1) 0%,
+    hsla(var(--h), var(--s), var(--l), 0.6) 100%); 
     padding: 0.7em 0;
 }
 .service-line p:first-child {

@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Студия Шёлк | главная </title>
+    <meta name="description" content="Студия эстетики тела «Шёлк» в Барнауле. Массаж, обёртывания, уход за лицом и телом. Запись онлайн или по телефону.">
+    <title> Студия Шёлк | Главная </title>
 
     <link rel="stylesheet" href="./styles/index.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="index.js" defer></script>
 </head>
 
@@ -16,14 +21,6 @@
         </div>
 
         <div class="flow flow--space-small">
-            <nav>
-                <ul class="flex primary-navigation">
-                    <li>Главная</li>
-                    <li>Услуги</li>
-                    <li>Контакты</li>
-                    <li></li>
-                </ul>
-            </nav>
             <h1 class="uppercase">Студия эстетики тела</h1>
             <img src="./assets/logo.svg" alt="Логотип студии Шёлк">
             <p class="lowercase">Всё будет гладко</p>
@@ -31,7 +28,7 @@
     </header>
 
     <main class="grid grid-container grid-container--home flow">
-        <button type="button" class="btn-appointment">Записаться</button> <!-- ← теперь здесь -->
+        <button type="button" class="btn-appointment">Записаться</button>
 
         <section class="images-wrapper" aria-label="Фотографии интерьера студии">
             <div class="carousel-viewport">
@@ -87,7 +84,7 @@
         
     <section class="reviews grid">
         <h2 class="uppercase">Отзывы</h2>
-        <div class="reviews-carousel-wrapper"> <!-- новая обёртка -->
+        <div class="reviews-carousel-wrapper"> 
             <div class="reviews-carousel flex">
                 <!-- Слайды заполняются скриптом -->
             </div>
@@ -139,9 +136,9 @@
     </div>
   </div>
 
-  <!-- Макс (Telegram) -->
+  <!-- Макс -->
   <div class="contact-card">
-    <img src="assets/social/logo_max.svg" alt="Telegram" width="48" height="48" class="contact-card-icon">
+    <img src="assets/social/logo_max.svg" alt="Мессенджер Макс" width="48" height="48" class="contact-card-icon">
     <div class="contact-card-info">
       <div class="contact-card-row">
         <a href="https://t.me/max_studio" target="_blank" rel="noopener noreferrer" class="contact-card-btn">Перейти в Макс</a>
@@ -172,7 +169,8 @@
     });
   });
 </script>
-    <form id="contact-form" class="contact-form" novalidate>
+    <form id="contact-form" class="contact-form" action="https://formspree.io/f/moeqynnl"
+  method="POST" novalidate>
         <div class="form-columns">
             <div class="form-column form-column--contacts">
                 <div class="form-group">

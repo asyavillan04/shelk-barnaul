@@ -1,13 +1,4 @@
-// Мобильное меню
-const navToggle = document.querySelector('.mobile-nav-toggle');
-const nav = document.querySelector('.primary-navigation');
-if (navToggle && nav) {
-  navToggle.addEventListener('click', () => {
-    const isVisible = nav.getAttribute('data-visible') === 'true';
-    nav.setAttribute('data-visible', !isVisible);
-    navToggle.setAttribute('aria-expanded', !isVisible);
-  });
-}
+
 
 // --- Контактная форма ---
 const form = document.getElementById('contact-form');
@@ -39,10 +30,10 @@ if (form) {
 
     if (!isValid) return;
 
-    // Отправка через Formspree (замени YOUR_FORM_ID на свой)
+    // Отправка через Formspree
     const formData = new FormData(form);
     try {
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const response = await fetch('https://formspree.io/f/FORM_ID', {
         method: 'POST',
         body: formData,
         headers: { 'Accept': 'application/json' }
@@ -257,7 +248,7 @@ if (carouselTrack && totalSlides) {
     startAutoplay();
 }
 
-// --- Карусель отзывов (бесконечная, без прозрачности) ---
+// --- Карусель отзывов ---
 const reviewsTrack = document.querySelector('.reviews-carousel');
 const reviewsViewport = document.querySelector('.reviews-carousel-wrapper');
 const reviewsIndicatorsContainer = document.querySelector('.reviews-controls.dot-indicators');
@@ -404,7 +395,7 @@ if (reviewsTrack && totalReviews) {
     // Автоплей
     let autoplay;
     function startAutoplay() {
-        autoplay = setInterval(() => goToSlide(currentIndex + 1), 5000);
+        autoplay = setInterval(() => goToSlide(currentIndex + 1), 10000);
     }
     function stopAutoplay() {
         clearInterval(autoplay);

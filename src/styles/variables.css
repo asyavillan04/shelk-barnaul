@@ -13,4 +13,6 @@
     --s: 0%;
     --l: 100%;
     --color-bg-alt: hsl(var(--h), var(--s), var(--l));
+
+    --shadow: 0 10px 10px rgba(16, 11, 25, 0.1);
 }
