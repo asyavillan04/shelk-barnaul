@@ -1,8 +1,15 @@
 .btn-appointment {
-    background-image: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
+    background: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
     color: var(--clr-bg-alt);
     padding: 1em 2em;
     border-radius: var(--border-radius);
+    background-size: 150% 100%;
+    background-position: right center;
+    transition: background-position 0.3s ease;
+}
+
+.btn-appointment:hover {
+    background-position: left center;
 }
 
 .dot-indicators {
@@ -16,14 +23,21 @@
     cursor: pointer;
     border: 0;
     border-radius: 50%;
-    padding: .6em;
+    padding: .4em;
     background-color: transparent;
-    border: 3px solid var(--clr-purple-dark);
+    border: 2px solid var(--clr-purple-dark);
+}
+
+@media (min-width: 35em) {
+    .dot-indicators > * {
+    padding: .6em;
+    border-width: 3px
+}
 }
 
 .dot-indicators > *:hover,
-.dot-indicators > *:focus {
-    background-color: var(--clr-purple);
+.dot-indicators > *:focus-visible {
+    background-color: var(--clr-bg-alt);
 }
 
 .dot-indicators > [aria-selected="true"] {

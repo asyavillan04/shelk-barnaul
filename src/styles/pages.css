@@ -109,15 +109,30 @@ section {
 } */
 
 .images-carousel > picture {
-    flex: 0 0 80vw;
-    width: 80vw;
+    flex: 0 0 90vw;
+    width: 90vw;
     display: block;     
     transition: opacity 0.8s ease;
+    object-position: center bottom;
+}
+
+@media(min-width: 35em) {
+    .images-carousel > picture {
+    flex: 0 0 80vw;
+    width: 80vw;
+    }
+}
+
+@media(min-width: 45em) {
+    .images-carousel > picture {
+    flex: 0 0 70vw;
+    width: 60vw;
+    }
 }
 
 .images-carousel > picture > img {
-    width: 100%;
-    height: auto;     
+    min-height: 100%;
+    min-width: 100%;    
     object-fit: cover;
     object-position: center bottom;
     display: block;
@@ -135,7 +150,7 @@ section {
 
 .carousel-controls {
   position: absolute;
-  bottom: 15px;     
+  bottom: var(--gap-small);     
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;    
@@ -300,12 +315,31 @@ header > div:first-child::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5em;
-    min-height: 100px;
+    padding: 0.5em;              /* уменьшили отступы для мобильных */
+    height: auto;              /* высота зависит от содержимого */
     background-color: var(--clr-bg-alt);
     border-radius: var(--border-radius);
     box-sizing: border-box;
     box-shadow: var(--shadow);
+}
+
+.reviews-carousel > div > img {
+    width: 100%;  
+    align-self: center;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+@media (min-width: 35em) {
+    .reviews-carousel > div > img {
+        width: 70%;   
+    }
+}
+
+@media (min-width: 45em) {
+    .reviews-carousel > div > img {
+        width: 60%;   
+    }
 }
 
 @media (min-width: 35em) {
