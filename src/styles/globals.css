@@ -95,6 +95,17 @@
     text-transform: lowercase;
 }
 
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
 body {
     background-color: var(--clr-bg);
     color: var(--clr-purple-darkest);

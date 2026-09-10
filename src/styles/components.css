@@ -1,6 +1,26 @@
+/* скроллбар */
+/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar-thumb {
+    background: var(--clr-purple-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--clr-purple-darkest);
+}
+
+::-webkit-scrollbar-button {
+    background-color: var(--clr-purple-dark);
+}
+
+/* Firefox */
+html {
+    scrollbar-color: var(--clr-purple-dark) transparent;
+}
+
 .btn-appointment {
     background: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
     color: var(--clr-bg-alt);
+    text-decoration: none;
     padding: 1em 2em;
     border-radius: var(--border-radius);
     background-size: 150% 100%;
@@ -68,3 +88,4 @@
 .images-carousel::-webkit-scrollbar {
   display: none;
 }
+
