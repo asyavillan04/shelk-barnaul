@@ -15,4 +15,40 @@
     --color-bg-alt: hsl(var(--h), var(--s), var(--l));
 
     --shadow: 0 10px 10px rgba(16, 11, 25, 0.1);
+
+    /* gaps */
+    --gap-small: 0.5em;
+    --gap-medium: 2em;
+    --gap-large: 1px;
+
+    /* font-sizes */
+    --fs-900: clamp(1rem, 2.5vw + 0.3rem, 3.2rem);
+    --fs-800: 3.5rem;
+    --fs-700: 1.5rem;
+    --fs-600: 1rem;
+    --fs-500: 1rem;
+    --fs-400: 0.9375rem;
+    --fs-300: clamp(0.5rem, 0.65vw + 0.3rem, 2rem);
+    --fs-200: 0.875rem;
+
+    @media (min-width: 35em) {
+    :root {
+        --fs-800: 5rem;
+        --fs-700: 2.5rem;
+        --fs-600: 1.5rem;
+        --fs-500: 1.25rem;
+        --fs-400: 1rem;
+    }
+}
+
+    @media (min-width: 45em) {
+        :root {
+            /* font-sizes */
+            --fs-800: 6.25rem;
+            --fs-700: 3.5rem;
+            --fs-600: 2rem;
+            --fs-500: 1.75rem;
+            --fs-400: 1.125rem;
+        }
+    }
 }

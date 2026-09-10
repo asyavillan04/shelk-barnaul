@@ -76,32 +76,115 @@ const carouselTrack = document.querySelector('.images-carousel');
 const carouselViewport = document.querySelector('.carousel-viewport');
 const indicatorsContainer = document.querySelector('.dot-indicators');
 
-// Исходные изображения
-const imageSources = [
-    './assets/home-images/home-1.jpeg',
-    './assets/home-images/home-2.jpeg',
-    './assets/home-images/home-3.jpg',
-    './assets/home-images/home-4.jpg',
+const imageVariants = [
+    {
+        avif: {
+            small: './assets/home-images/home-1-small.avif',
+            large: './assets/home-images/home-1-large.avif'
+        },
+        webp: {
+            small: './assets/home-images/home-1-small.webp',
+            large: './assets/home-images/home-1-large.webp'
+        },
+        jpeg: {
+            small: './assets/home-images/home-1-small.jpeg',
+            large: './assets/home-images/home-1-large.jpeg'
+        }
+    },
+    {
+        avif: {
+            small: './assets/home-images/home-2-small.avif',
+            large: './assets/home-images/home-2-large.avif'
+        },
+        webp: {
+            small: './assets/home-images/home-2-small.webp',
+            large: './assets/home-images/home-2-large.webp'
+        },
+        jpeg: {
+            small: './assets/home-images/home-2-small.jpeg',
+            large: './assets/home-images/home-2-large.jpeg'
+        }
+    },
+    {
+        avif: {
+            small: './assets/home-images/home-3-small.avif',
+            large: './assets/home-images/home-3-large.avif'
+        },
+        webp: {
+            small: './assets/home-images/home-3-small.webp',
+            large: './assets/home-images/home-3-large.webp'
+        },
+        jpeg: {
+            small: './assets/home-images/home-3-small.jpg',
+            large: './assets/home-images/home-3-large.jpg'
+        }
+    },
+    {
+        avif: {
+            small: './assets/home-images/home-4-small.avif',
+            large: './assets/home-images/home-4-large.avif'
+        },
+        webp: {
+            small: './assets/home-images/home-4-small.webp',
+            large: './assets/home-images/home-4-large.webp'
+        },
+        jpeg: {
+            small: './assets/home-images/home-4-small.jpg',
+            large: './assets/home-images/home-4-large.jpg'
+        }
+    }
 ];
-const totalSlides = imageSources.length;
+
+const totalSlides = imageVariants.length;
 
 if (carouselTrack && totalSlides) {
     carouselTrack.innerHTML = '';
     indicatorsContainer.innerHTML = '';
 
-    function createSlide(src, realIndex) {
+    // Функция создания слайда
+    function createSlide(variant, realIndex) {
+        const picture = document.createElement('picture');
+        picture.dataset.index = realIndex;
+
+        // Источник AVIF 
+        const sourceAvif = document.createElement('source');
+        sourceAvif.type = 'image/avif';
+        sourceAvif.srcset = `
+            ${variant.avif.small} 480w,
+            ${variant.avif.large} 1200w
+        `;
+        sourceAvif.sizes = '(max-width: 600px) 480px, 1200px';
+        picture.appendChild(sourceAvif);
+
+        // Источник WebP (если AVIF не поддерживается)
+        const sourceWebp = document.createElement('source');
+        sourceWebp.type = 'image/webp';
+        sourceWebp.srcset = `
+            ${variant.webp.small} 480w,
+            ${variant.webp.large} 1200w
+        `;
+        sourceWebp.sizes = '(max-width: 600px) 480px, 1200px';
+        picture.appendChild(sourceWebp);
+
+        // Fallback на JPEG (если ни AVIF, ни WebP не поддерживаются)
         const img = document.createElement('img');
-        img.src = src;
+        img.src = variant.jpeg.large;               // базовый src
+        img.srcset = `
+            ${variant.jpeg.small} 480w,
+            ${variant.jpeg.large} 1200w
+        `;
+        img.sizes = '(max-width: 600px) 480px, 1200px';
         img.alt = '';
-        img.dataset.index = realIndex;
-        return img;
+        picture.appendChild(img);
+
+        return picture;
     }
 
-    // Трек: [клон последнего, 0, 1, 2, клон первого]
-    const lastClone = createSlide(imageSources[totalSlides - 1], totalSlides - 1);
-    const firstClone = createSlide(imageSources[0], 0);
+    // Трек: [клон последнего, 0, 1, 2, ..., клон первого]
+    const lastClone = createSlide(imageVariants[totalSlides - 1], totalSlides - 1);
+    const firstClone = createSlide(imageVariants[0], 0);
     carouselTrack.appendChild(lastClone);
-    imageSources.forEach((src, idx) => carouselTrack.appendChild(createSlide(src, idx)));
+    imageVariants.forEach((variant, idx) => carouselTrack.appendChild(createSlide(variant, idx)));
     carouselTrack.appendChild(firstClone);
 
     // Точки для реальных слайдов
@@ -114,9 +197,9 @@ if (carouselTrack && totalSlides) {
         indicatorsContainer.appendChild(btn);
     }
 
-    const allSlides = [...carouselTrack.children];
+    const allSlides = [...carouselTrack.children];   // теперь это <picture>
     const indicators = [...indicatorsContainer.children];
-    let currentIndex = 1;        // индекс в allSlides, начинаем с реального первого (позиция 1)
+    let currentIndex = 1;        // в allSlides: 0 – клон последнего, 1..totalSlides – настоящие, totalSlides+1 – клон первого
     let isTransitioning = false;
     let step = 0;
     let viewportWidth = 0;
@@ -142,7 +225,6 @@ if (carouselTrack && totalSlides) {
     function updateActiveClasses() {
         const realActive = (currentIndex - 1 + totalSlides) % totalSlides;
 
-        // Проставляем классы active/prev/next на все слайды
         allSlides.forEach(slide => {
             slide.classList.remove('active', 'prev', 'next');
             const slideRealIndex = parseInt(slide.dataset.index, 10);
@@ -155,7 +237,6 @@ if (carouselTrack && totalSlides) {
             }
         });
 
-        // Обновляем точки
         indicators.forEach((btn, i) => {
             btn.setAttribute('aria-selected', i === realActive ? 'true' : 'false');
         });
@@ -170,17 +251,14 @@ if (carouselTrack && totalSlides) {
             return;
         }
 
-        // Запускаем движение
-        carouselTrack.style.transition = 'transform 0.3s ease'; // должно совпадать с CSS
+        carouselTrack.style.transition = 'transform 0.3s ease';
         centerSlide(index);
         currentIndex = index;
-
-        // Сразу же обновляем прозрачность (классы active/prev/next)
         updateActiveClasses();
     }
 
     function goToRealIndex(realIndex) {
-        goToSlide(realIndex + 1);   // в полном массиве реальный слайд на позиции realIndex+1
+        goToSlide(realIndex + 1);
     }
 
     // Бесшовный прыжок после завершения анимации
@@ -188,17 +266,14 @@ if (carouselTrack && totalSlides) {
         isTransitioning = false;
         const totalAll = allSlides.length;
 
-        // На клоне последнего (индекс 0) → прыгаем на реальный последний (totalAll-2)
-        if (currentIndex === 0) {
+        if (currentIndex === 0) {   // на клоне последнего
             carouselTrack.style.transition = 'none';
-            currentIndex = totalAll - 2;
+            currentIndex = totalAll - 2;   // реальный последний
             centerSlide(currentIndex);
-            updateActiveClasses();   // синхронизируем после мгновенного скачка
-        }
-        // На клоне первого (индекс totalAll-1) → прыгаем на реальный первый (1)
-        else if (currentIndex === totalAll - 1) {
+            updateActiveClasses();
+        } else if (currentIndex === totalAll - 1) {   // на клоне первого
             carouselTrack.style.transition = 'none';
-            currentIndex = 1;
+            currentIndex = 1;   // реальный первый
             centerSlide(currentIndex);
             updateActiveClasses();
         }
@@ -206,9 +281,9 @@ if (carouselTrack && totalSlides) {
 
     // Клик по слайду
     carouselTrack.addEventListener('click', (e) => {
-        const img = e.target.closest('img');
-        if (!img) return;
-        const clickedRealIndex = parseInt(img.dataset.index, 10);
+        const picture = e.target.closest('picture');
+        if (!picture) return;
+        const clickedRealIndex = parseInt(picture.dataset.index, 10);
         const currentReal = (currentIndex - 1 + totalSlides) % totalSlides;
         if (clickedRealIndex !== currentReal) {
             goToRealIndex(clickedRealIndex);
@@ -219,7 +294,7 @@ if (carouselTrack && totalSlides) {
     function initCarousel() {
         updateSizes();
         if (step === 0) return;
-        currentIndex = 1;   // реальный первый
+        currentIndex = 1;
         carouselTrack.style.transition = 'none';
         centerSlide(currentIndex);
         updateActiveClasses();

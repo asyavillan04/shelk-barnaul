@@ -85,6 +85,7 @@ section {
 
     transition: transform 0.5s ease;
     will-change: transform;
+    gap: var(--gap-small);
 }
 
 @media (min-width: 35em) {
@@ -99,13 +100,30 @@ section {
     }
 }
 
-.images-carousel > * {
+/* .images-carousel > * {
     flex: 0 0 80vw;
     width: 80vw;
     height: auto;
     object-fit: cover;
     transition: opacity 0.8s ease;
+} */
+
+.images-carousel > picture {
+    flex: 0 0 80vw;
+    width: 80vw;
+    display: block;     
+    transition: opacity 0.8s ease;
 }
+
+.images-carousel > picture > img {
+    width: 100%;
+    height: auto;     
+    object-fit: cover;
+    object-position: center bottom;
+    display: block;
+
+}
+
 .images-carousel .prev,
 .images-carousel .next {
     opacity: 0.5;
@@ -155,7 +173,7 @@ header > div:first-child::after {
     background-color: var(--clr-bg-alt);
     grid-area: services;
     border-radius: var(--border-radius);
-    padding: 2em;
+    padding: var(--gap-medium);
     box-shadow: var(--shadow);
 }
 
@@ -178,6 +196,10 @@ header > div:first-child::after {
     color: inherit;
 }
 
+.service-name {
+    font-size: var(--fs-300);
+}
+
 /* Планшет (35em) – сетка 2×2 */
 @media (min-width: 35em) {
     .services-wrapper {
@@ -197,11 +219,11 @@ header > div:first-child::after {
     .services-wrapper {
         flex-wrap: nowrap; 
         justify-content: space-evenly;
-        gap: 0; 
+        gap: var(--gap-small); 
     }
 
     .services__card-link {
-        width: 15vw;  
+        min-width: 15vw;  
         max-width: none;
     }
 }
@@ -231,14 +253,14 @@ header > div:first-child::after {
     position: relative;
     z-index: 100;
 }
-.services__card-link::after {
+.services__card-image::after {
     content: '';
     position: absolute;
     inset: 0;
     background-image: linear-gradient(to bottom, var(--clr-bg) 10%, transparent 100%);
     pointer-events: none;
     z-index: 1;
-    top: 3em;
+    top: 0;
 }
 
 /* ------------------- */
@@ -262,7 +284,7 @@ header > div:first-child::after {
 
 .reviews-carousel {
     display: flex;
-    gap: 10px;
+    gap: var(--gap-small);
     transition: transform 0.4s ease;
     will-change: transform;
 }
