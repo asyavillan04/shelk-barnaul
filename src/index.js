@@ -479,3 +479,33 @@ if (reviewsTrack && totalReviews) {
     reviewsViewport?.addEventListener('mouseleave', startAutoplay);
     startAutoplay();
 }
+
+// Модальное окно с политикой
+const policyModal = document.getElementById('policy-modal');
+const openPolicyBtn = document.getElementById('open-policy');
+const closeModalBtn = policyModal?.querySelector('.modal-close');
+
+// Открытие
+openPolicyBtn?.addEventListener('click', (e) => {
+    e.preventDefault(); // чтобы ссылка не перезагружала страницу
+    policyModal.classList.add('open');
+});
+
+// Закрытие по кнопке
+closeModalBtn?.addEventListener('click', () => {
+    policyModal.classList.remove('open');
+});
+
+// Закрытие по клику вне окна
+policyModal?.addEventListener('click', (e) => {
+    if (e.target === policyModal) {
+        policyModal.classList.remove('open');
+    }
+});
+
+// Закрытие по Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && policyModal?.classList.contains('open')) {
+        policyModal.classList.remove('open');
+    }
+});
