@@ -174,6 +174,8 @@ header > div:first-child::after {
     grid-area: services;
     border-radius: var(--border-radius);
     padding: var(--gap-medium);
+    width: calc(100% - var(--gap-medium) * 2);
+    margin: var(--gap-medium);
     box-shadow: var(--shadow);
 }
 
@@ -181,7 +183,7 @@ header > div:first-child::after {
 .services-wrapper {
     flex-direction: column;
     align-items: stretch;      
-    gap: 2rem;     
+    gap: var(--gap-medium);     
 }
 
 .services__card-link {
@@ -202,6 +204,10 @@ header > div:first-child::after {
 
 /* Планшет (35em) – сетка 2×2 */
 @media (min-width: 35em) {
+    .services {
+        margin-inline: -2em;
+        width: calc(100% + 2em);
+    }
     .services-wrapper {
         flex-direction: row;
         flex-wrap: wrap; 
@@ -209,7 +215,7 @@ header > div:first-child::after {
     }
 
     .services__card-link {
-        width: calc(50% - 1rem); 
+        width: calc(50% - 2em); 
         max-width: 300px; 
     }
 }
@@ -224,7 +230,7 @@ header > div:first-child::after {
 
     .services__card-link {
         min-width: 15vw;  
-        max-width: none;
+        max-width: 7em;
     }
 }
 
@@ -290,11 +296,11 @@ header > div:first-child::after {
 }
 
 .reviews-carousel > div {
-    flex: 0 0 50vw;  
+    flex: 0 0 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2em;
+    padding: 0.5em;
     min-height: 100px;
     background-color: var(--clr-bg-alt);
     border-radius: var(--border-radius);
@@ -302,16 +308,31 @@ header > div:first-child::after {
     box-shadow: var(--shadow);
 }
 
+@media (min-width: 35em) {
+    .reviews-carousel > div {
+        flex: 0 0 70%;
+        padding: 1em;
+    }
+}
+
+@media (min-width: 45em) {
+    .reviews-carousel > div {
+        flex: 0 0 50vw;
+        padding: 1em;
+    }
+}
+
 .reviews-carousel > div > img {
     width: 60%;
     align-self: center;
     border-radius: 10px;
-    pointer-events: none; 
+    pointer-events: none;
 }
 
 .reviews > h2 {
     grid-area: header;
 }
+
 .reviews-controls {
     grid-area: tabs;
 }
@@ -327,6 +348,15 @@ header > div:first-child::after {
     .tech {
         width: 50%;
     }
+}
+
+.video {
+    display: block;
+    width: 100%;          /* растягивается по ширине родителя */
+    max-width: 360px;     /* но не шире исходного размера */
+    height: auto;         /* высота подстраивается пропорционально */
+    border-radius: var(--border-radius, 12px);
+    box-shadow: var(--shadow, 0 4px 12px rgba(0,0,0,0.1));
 }
 
 /* ------------------- */
