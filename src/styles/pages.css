@@ -440,7 +440,9 @@ header > div:first-child::after {
 }
 
 .contact-card-row {
+    width: 100%;
     display: grid;
+    grid-template-columns: 1fr auto;
     grid-auto-flow: column;
     gap: 0.5rem;
     align-items: center;
@@ -455,11 +457,12 @@ header > div:first-child::after {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    flex: 1;
 }
 
 .contact-card-btn {
-    background: var(--clr-purple);
-    color: #fff;
+    background-color: var(--clr-purple-dark);
+    color: var(--clr-bg-alt);
     border: none;
     border-radius: 4px;
     padding: 0.3em 1em;
@@ -472,18 +475,27 @@ header > div:first-child::after {
 }
 
 .contact-card-btn:hover {
-    background: var(--clr-purple-dark);
+    background-color: var(--clr-purple-dark);
 }
 
+.copy-btn {
+    height: 1.5em;
+    aspect-ratio: 1;
+    background-image: url(../assets/social/icon-copy.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60% auto;
+    background-color: var(--clr-purple);
+}
 .copy-btn.copied {
-    background: rgb(91, 145, 77);
+    background-color: rgb(91, 145, 77);
 }
-
 /* ===== Форма ===== */
 .contact-form {
     width: 100%;
 }
 
+/* Mobile first: всё в одну колонку */
 .form-columns {
     display: grid;
     grid-template-columns: 1fr;
@@ -513,10 +525,10 @@ header > div:first-child::after {
 .form-group textarea {
     width: 100%;
     padding: 0.6em;
-    border: 1px solid var(--clr-border, #ccc);
+    border: 1px solid var(--clr-purple-dark);
     border-radius: calc(var(--border-radius) / 2);
     font-family: inherit;
-    background-color: #fff;
+    background-color: var(--clr-bg-alt);
     transition: border-color 0.2s;
 }
 
@@ -526,6 +538,7 @@ header > div:first-child::after {
     outline: none;
 }
 
+/* ===== Чекбокс: чекбокс + label, ошибка на всю ширину ===== */
 .form-group--checkbox {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -554,25 +567,27 @@ header > div:first-child::after {
 
 .form-group--checkbox .error-message {
     grid-area: error;
-    display: none;
 }
 
+/* ===== Кнопка ===== */
 .submit-btn {
-    background-color: var(--clr-purple);
-    color: #fff;
+    background: linear-gradient(to right, var(--clr-purple-darkest), var(--clr-purple));
+    background-size: 200% 100%;
+    background-position: right center;
+    transition: background-position 0.3s ease; /* изменение цвета за счёт сдвига градиента */
+
+    color: var(--clr-bg-alt);
     border: none;
     border-radius: var(--border-radius);
-    padding: 0.75em 2em;
+    padding: 0.75em 0;
     cursor: pointer;
     font-size: 1rem;
-    transition: background 0.2s;
     width: 100%;
-    margin-top: 0.5rem;
-    align-self: end;
+    text-align: center;
 }
 
 .submit-btn:hover {
-    background-color: var(--clr-purple-dark);
+    background-position: left center;
 }
 
 .error-message {
@@ -582,41 +597,45 @@ header > div:first-child::after {
 }
 
 .form-feedback {
-    margin-top: 0.5rem;
     font-size: 0.9rem;
     color: green;
+    grid-column: 1 / -1;
 }
 
+/* ===== Планшет (35em): сетка на 4 колонки ===== */
 @media (min-width: 35em) {
     .form-columns {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         grid-template-areas:
-            "phone    submit"
-            "comment  comment"
-            "checkbox checkbox"
-            "feedback feedback";
+            "name    name    phone   phone"
+            "comment comment comment comment"
+            "checkbox checkbox checkbox submit"
+            "feedback feedback feedback feedback";
         gap: 1rem;
     }
 
-    .form-column--contacts > .form-group {
+    .form-column--contacts > .form-group:nth-child(1) {
+        grid-area: name;
+    }
+
+    .form-column--contacts > .form-group:nth-child(2) {
         grid-area: phone;
     }
-    .form-column--message > .submit-btn {
-        grid-area: submit;
-        width: auto;
-        white-space: nowrap;
-        margin-top: 0;
-    }
-    .form-column--message > .form-group:not(.form-group--checkbox):not(.form-feedback) {
+
+    .form-column--message > .form-group:not(.form-group--checkbox) {
         grid-area: comment;
     }
 
     .form-column--message > .form-group--checkbox {
         grid-area: checkbox;
+        align-self: center;
     }
 
-    .form-column--message > .form-feedback {
-        grid-area: feedback;
+    .form-column--message > .submit-btn {
+        grid-area: submit;
+        width: 100%;
+        white-space: nowrap;
+        align-self: center;
     }
 }
 

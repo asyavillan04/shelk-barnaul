@@ -119,7 +119,7 @@
       </div>
       <div class="contact-card-row">
         <span class="contact-card-id" id="phone-id">+7 (900) 000-00-00</span>
-        <button class="contact-card-btn copy-btn" data-target="phone-id">К</button>
+        <button class="contact-card-btn copy-btn" data-target="phone-id"></button>
       </div>
     </div>
   </div>
@@ -133,7 +133,7 @@
       </div>
       <div class="contact-card-row">
         <span class="contact-card-id" id="vk-id">vk.com/студия_шёлк</span>
-        <button class="contact-card-btn copy-btn" data-target="vk-id">К</button>
+        <button class="contact-card-btn copy-btn" data-target="vk-id"></button>
       </div>
     </div>
   </div>
@@ -147,7 +147,7 @@
       </div>
       <div class="contact-card-row">
         <span class="contact-card-id" id="max-id">@max_studio</span>
-        <button class="contact-card-btn copy-btn" data-target="max-id">К</button>
+        <button class="contact-card-btn copy-btn" data-target="max-id"></button>
       </div>
     </div>
   </div>
@@ -175,6 +175,11 @@
   method="POST" novalidate>
         <div class="form-columns">
             <div class="form-column form-column--contacts">
+                <div class="form-group">
+                    <label for="name">Имя</label>
+                    <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+                    <span class="error-message" id="name-error"></span>
+                </div>
                 <div class="form-group">
                     <label for="phone">Телефон</label>
                     <input type="tel" id="phone" name="phone" placeholder="+7 900 000-00-00" required>
