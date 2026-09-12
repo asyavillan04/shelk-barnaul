@@ -260,7 +260,7 @@ section {
     }
 }
 
-/* Десктоп (45em) */
+/* Десктоп (64em) */
 @media (min-width: 64em) {
     .services-wrapper {
         flex-wrap: nowrap; 
@@ -287,7 +287,9 @@ section {
     transition: transform 0.3s ease-in-out;
 }
 .services__card-link:hover .services__card-image img,
-.services__card-link:focus .services__card-image img {
+.services__card-link:focus .services__card-image img,
+.services__card-link:hover .services__card-image img,
+.services__card-link:active .services__card-image img {
     transform: scale(1.1);
 }
 .service-name {

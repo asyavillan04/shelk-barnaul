@@ -270,15 +270,20 @@ if (carouselTrack && totalSlides) {
         }
     });
 
-    carouselTrack.addEventListener('click', (e) => {
-        const picture = e.target.closest('picture');
-        if (!picture) return;
-        const clickedRealIndex = parseInt(picture.dataset.index, 10);
-        const currentReal = (currentIndex - 1 + totalSlides) % totalSlides;
-        if (clickedRealIndex !== currentReal) {
-            goToRealIndex(clickedRealIndex);
-        }
-    });
+carouselTrack.addEventListener('click', (e) => {
+    const picture = e.target.closest('picture');
+    if (!picture) return;
+    const clickedRealIndex = parseInt(picture.dataset.index, 10);
+    const currentReal = (currentIndex - 1 + totalSlides) % totalSlides;
+    if (clickedRealIndex === currentReal) return;
+
+    // Считаем кратчайшее направление с учётом зацикливания
+    let diff = clickedRealIndex - currentReal;
+    if (diff >  totalSlides / 2) diff -= totalSlides;
+    if (diff < -totalSlides / 2) diff += totalSlides;
+
+    goToSlide(currentIndex + diff);
+});
 
     // Swipe для карусели изображений
     addSwipe(
@@ -425,17 +430,19 @@ if (reviewsTrack && totalReviews) {
             updateIndicators();
         }
     });
-
     reviewsTrack.addEventListener('click', (e) => {
         const slide = e.target.closest('div[data-index]');
         if (!slide) return;
         const clickedRealIndex = parseInt(slide.dataset.index, 10);
         const currentReal = (currentIndex - 1 + totalReviews) % totalReviews;
-        if (clickedRealIndex !== currentReal) {
-            goToRealIndex(clickedRealIndex);
-        }
-    });
+        if (clickedRealIndex === currentReal) return;
 
+        let diff = clickedRealIndex - currentReal;
+        if (diff >  totalReviews / 2) diff -= totalReviews;
+        if (diff < -totalReviews / 2) diff += totalReviews;
+
+        goToSlide(currentIndex + diff);
+    });
     // Swipe для карусели отзывов
     addSwipe(
         reviewsViewport,
