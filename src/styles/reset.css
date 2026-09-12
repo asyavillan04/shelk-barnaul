@@ -24,14 +24,17 @@ picture {
     margin: 0; 
 }
 
-h1,
+h1 {
+    font-weight: 400;
+}
 h2,
 h3,
 h4,
 h5,
 h6,
-p {
-    font-weight: 400;
+p,
+a {
+    font-weight: 500;
 }
 
 
@@ -54,6 +57,7 @@ select {
 button {
     all: unset;
     cursor: pointer;
+    font-weight: 500;
 }
 
 ul {

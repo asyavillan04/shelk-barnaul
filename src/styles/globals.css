@@ -95,6 +95,10 @@
     text-transform: lowercase;
 }
 
+.bold {
+    font-weight: 500;
+}
+
 
 html {
     scroll-behavior: smooth;
@@ -112,9 +116,9 @@ body {
     font-size: 1.2em;
     position: relative;
     font-family: "Montserrat", sans-serif;
-    font-weight: 400;
     font-style: normal;
 }
+
 
 .main-header {
     flex-direction: column-reverse;

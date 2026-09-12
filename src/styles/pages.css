@@ -769,7 +769,6 @@ body.price-page::before {
     text-align: left;
     background-image: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
     color: var(--clr-bg-alt);
-    border-radius: var(--border-radius);
 }
 
 .pricelist-heading h3 {
