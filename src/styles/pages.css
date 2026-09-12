@@ -17,22 +17,29 @@ section {
 
 .btn-appointment {
     display: block;
-    margin: 0 auto 2rem; 
     justify-self: center;
     align-self: center;
     grid-area: btn;
     position: relative;
     z-index: 100;
     box-shadow: var(--shadow);
+    margin: 0 0 2rem 0;
 }
 
 @media (min-width: 35em) {
     .btn-appointment {
         justify-self: end;
+        margin: 0 5vw 2rem 0; 
     }
 }
 
-@media (min-width: 45em) {
+@media (min-width: 64em) {
+    .btn-appointment {
+        margin: 0;
+    }
+}
+
+@media (min-width: 64em) {
     .grid-container--home {
         grid-template-areas: 
             "images images images images"
@@ -69,74 +76,52 @@ section {
 }
 
 .images-wrapper {
-    position: relative; 
+    position: relative;
     display: inline-block;
     grid-area: images;
 }
 
-
 .images-carousel {
     position: relative;
-    
     width: 100%;
-    height: 20vh;
     z-index: 1;
     scroll-behavior: smooth;
-
     transition: transform 0.5s ease;
     will-change: transform;
     gap: var(--gap-small);
 }
 
+/* Mobile first: пропорции от ширины */
+.images-carousel > picture {
+    flex: 0 0 90vw;
+    width: 90vw;
+    aspect-ratio: 16 / 10;  
+    display: block;
+    overflow: hidden;
+    transition: opacity 0.8s ease;
+}
+
+.images-carousel > picture > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    display: block;
+}
+
 @media (min-width: 35em) {
-    .images-carousel {
-        height: 50vh;
+    .images-carousel > picture {
+        flex: 0 0 80vw;
+        width: 80vw;
     }
 }
 
 @media (min-width: 45em) {
-    .images-carousel {
-        height: 60vh;
+    .images-60rousel > picture {
+        flex: 0 0 70vw;
+        width: 60vw;
+        max-height: 60vh;
     }
-}
-
-/* .images-carousel > * {
-    flex: 0 0 80vw;
-    width: 80vw;
-    height: auto;
-    object-fit: cover;
-    transition: opacity 0.8s ease;
-} */
-
-.images-carousel > picture {
-    flex: 0 0 90vw;
-    width: 90vw;
-    display: block;     
-    transition: opacity 0.8s ease;
-    object-position: center bottom;
-}
-
-@media(min-width: 35em) {
-    .images-carousel > picture {
-    flex: 0 0 80vw;
-    width: 80vw;
-    }
-}
-
-@media(min-width: 45em) {
-    .images-carousel > picture {
-    flex: 0 0 70vw;
-    width: 60vw;
-    }
-}
-
-.images-carousel > picture > img {
-    min-height: 100%;
-    min-width: 100%;    
-    object-fit: cover;
-    object-position: center bottom;
-    display: block;
-
 }
 
 .images-carousel .prev,
@@ -149,12 +134,12 @@ section {
 }
 
 .carousel-controls {
-  position: absolute;
-  bottom: var(--gap-small);     
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;    
-  margin: 0;
+    position: absolute;
+    bottom: var(--gap-small);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    margin: 0;
 }
 
 
@@ -236,7 +221,7 @@ header > div:first-child::after {
 }
 
 /* Десктоп (45em) */
-@media (min-width: 45em) {
+@media (min-width: 64em) {
     .services-wrapper {
         flex-wrap: nowrap; 
         justify-content: space-evenly;
@@ -336,7 +321,7 @@ header > div:first-child::after {
     }
 }
 
-@media (min-width: 45em) {
+@media (min-width: 64em) {
     .reviews-carousel > div > img {
         width: 60%;   
     }
@@ -349,7 +334,7 @@ header > div:first-child::after {
     }
 }
 
-@media (min-width: 45em) {
+@media (min-width: 64em) {
     .reviews-carousel > div {
         flex: 0 0 50vw;
         padding: 1em;
@@ -378,7 +363,7 @@ header > div:first-child::after {
     grid-area: tech;
     flex-direction: column;
 }
-@media (min-width: 45em) {
+@media (min-width: 64em) {
     .tech {
         width: 50%;
     }
@@ -640,7 +625,7 @@ header > div:first-child::after {
 }
 
 /* ===== Десктоп (45em): соцсети слева, форма справа ===== */
-@media (min-width: 45em) {
+@media (min-width: 64em) {
     .contacts-layout {
         grid-template-columns: 1fr 2fr;
         gap: 2rem;

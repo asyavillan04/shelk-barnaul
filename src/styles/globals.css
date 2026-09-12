@@ -95,11 +95,6 @@
     text-transform: lowercase;
 }
 
-.bold {
-    font-weight: 500;
-}
-
-
 html {
     scroll-behavior: smooth;
 }
