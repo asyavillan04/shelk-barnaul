@@ -521,6 +521,32 @@ section {
 .contact-form {
     width: 100%;
 }
+
+.contact-form {
+    width: 100%;
+    position: relative;
+}
+.contact-form::before {
+    content: '';
+    position: absolute;
+    top: -1rem; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background-color: var(--clr-purple-dark);
+    pointer-events: none;
+}
+@media (min-width: 64em) {
+    .contact-form::before {
+        top: 50%;
+        left: -1rem; 
+        transform: translateY(-50%);
+        width: 2px;
+        height: 80%;
+    }
+}
+
 .form-columns {
     display: grid;
     grid-template-columns: 1fr;
@@ -664,7 +690,7 @@ section {
     }
 }
 
-/* ===== Десктоп (45em): соцсети слева, форма справа ===== */
+/* ===== Десктоп (64em): соцсети слева, форма справа ===== */
 @media (min-width: 64em) {
     .contacts-layout {
         grid-template-columns: 1fr 2fr;
