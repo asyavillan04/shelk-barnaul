@@ -481,30 +481,41 @@ if (reviewsTrack && totalReviews) {
 }
 
 // =============================================
-// Модальное окно с политикой
+// Модальные окна (политика, противопоказания, подготовка)
 // =============================================
-const policyModal = document.getElementById('policy-modal');
-const openPolicyBtn = document.getElementById('open-policy');
-const closeModalBtn = policyModal?.querySelector('.modal-close');
-
-openPolicyBtn?.addEventListener('click', (e) => {
-    e.preventDefault();
-    policyModal.classList.add('open');
+document.querySelectorAll('[data-modal]').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = trigger.dataset.modal;
+        const modal = document.getElementById(id);
+        if (!modal) return;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
 });
 
-closeModalBtn?.addEventListener('click', () => {
-    policyModal.classList.remove('open');
-});
+document.querySelectorAll('.modal').forEach(modal => {
+    const closeBtn = modal.querySelector('.modal-close');
 
-policyModal?.addEventListener('click', (e) => {
-    if (e.target === policyModal) {
-        policyModal.classList.remove('open');
-    }
+    closeBtn?.addEventListener('click', () => {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    });
 });
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && policyModal?.classList.contains('open')) {
-        policyModal.classList.remove('open');
+    if (e.key !== 'Escape') return;
+    const opened = document.querySelector('.modal.open');
+    if (opened) {
+        opened.classList.remove('open');
+        document.body.style.overflow = '';
     }
 });
 

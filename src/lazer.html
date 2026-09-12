@@ -32,8 +32,8 @@
 
         <div class="warnings flow flow--space-small">
             <h3>Важно!</h3>
-            <p>Противопоказания</p>
-            <p>Подготовка к процедуре</p>
+            <p><button type="button" class="warnings-link" data-modal="modal-contraindications">Противопоказания</button></p>
+            <p><button type="button" class="warnings-link" data-modal="modal-preparation">Подготовка к процедуре</button></p>
         </div>
 
         <!-- Лицо -->
@@ -140,5 +140,22 @@
             </div>
         </div>
     </main>
+
+    <div class="modal" id="modal-contraindications" role="dialog" aria-modal="true" aria-labelledby="modal-contraindications-title">
+    <div class="modal-content">
+        <button type="button" class="modal-close" aria-label="Закрыть">×</button>
+        <h3 id="modal-contraindications-title">Противопоказания</h3>
+        <p>Здесь текст про противопоказания…</p>
+    </div>
+</div>
+
+<div class="modal" id="modal-preparation" role="dialog" aria-modal="true" aria-labelledby="modal-preparation-title">
+    <div class="modal-content">
+        <button type="button" class="modal-close" aria-label="Закрыть">×</button>
+        <h3 id="modal-preparation-title">Подготовка к процедуре</h3>
+        <p>Здесь текст про подготовку…</p>
+    </div>
+</div>
+
 </body>
 </html>
