@@ -42,7 +42,7 @@
     }
 }
 
-    @media (min-width: 45em) {
+    @media (min-width: 64em) {
         :root {
             /* font-sizes */
             --fs-800: 6.25rem;

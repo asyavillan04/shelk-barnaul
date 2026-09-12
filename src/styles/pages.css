@@ -2,6 +2,13 @@ section {
     width: 100%;
 }
 
+.images-carousel,
+.reviews-carousel {
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 /* Базовая сетка */
 .grid-container--home {
     grid-template-areas: 
@@ -21,15 +28,15 @@ section {
     align-self: center;
     grid-area: btn;
     position: relative;
-    z-index: 100;
+    z-index: 500;
     box-shadow: var(--shadow);
-    margin: 0 0 2rem 0;
+    margin: 0;
 }
 
 @media (min-width: 35em) {
     .btn-appointment {
         justify-self: end;
-        margin: 0 5vw 2rem 0; 
+        margin: 0; 
     }
 }
 
@@ -69,6 +76,8 @@ section {
 /* -------------------------------- */
 
 .carousel-viewport {
+    position: relative;
+    z-index: 100;
     overflow: hidden;
     width: 100%;
     outline: 4px solid var(--clr-purple-dark);
@@ -91,7 +100,6 @@ section {
     gap: var(--gap-small);
 }
 
-/* Mobile first: пропорции от ширины */
 .images-carousel > picture {
     flex: 0 0 90vw;
     width: 90vw;
@@ -117,7 +125,7 @@ section {
 }
 
 @media (min-width: 45em) {
-    .images-60rousel > picture {
+    .images-carousel > picture {
         flex: 0 0 70vw;
         width: 60vw;
         max-height: 60vh;
@@ -138,38 +146,51 @@ section {
     bottom: var(--gap-small);
     left: 50%;
     transform: translateX(-50%);
-    z-index: 2;
+    z-index: 1000;
     margin: 0;
 }
 
 
 /* Лаванда сверху секции */
-.has-lavender {
+
+.main-header {
     position: relative;
+    z-index: auto;
 }
 
+.main-header > div > * {
+    position: relative;
+    z-index: 1000;
+}
+
+.has-lavender {
+    position: relative;
+    z-index: 100;
+}
 .has-lavender::before {
     content: '';
     position: absolute;
-    bottom: 100%;         /* низ лаванды = верх секции */
+    bottom: 100%;
     left: 0;
-    width: 70vw;
-    height: 30vh;
-    background-image: url('../assets/decorations/lavender-header-desktop.png');
-    background-size: contain;
+    width: 100%;
+    aspect-ratio: 75 / 52;
+    background-image: url('../assets/decorations/lavender-header-mobile.png');
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: bottom left;
     z-index: 2;
     pointer-events: none;
 }
-
 @media (min-width: 35em) {
     .has-lavender::before {
         width: 45vw;
         height: 35vh;
+        aspect-ratio: auto;
+        background-image: url('../assets/decorations/lavender-header-desktop.png');
+        background-size: contain;
+        background-position: bottom left;
     }
 }
-
 @media (min-width: 64em) {
     .has-lavender::before {
         width: 32vw;
@@ -390,9 +411,9 @@ section {
 
 .video {
     display: block;
-    width: 100%;          /* растягивается по ширине родителя */
-    max-width: 360px;     /* но не шире исходного размера */
-    height: auto;         /* высота подстраивается пропорционально */
+    width: 100%;
+    max-width: 360px;
+    height: auto; 
     border-radius: var(--border-radius, 12px);
     box-shadow: var(--shadow, 0 4px 12px rgba(0,0,0,0.1));
 }
@@ -498,8 +519,6 @@ section {
 .contact-form {
     width: 100%;
 }
-
-/* Mobile first: всё в одну колонку */
 .form-columns {
     display: grid;
     grid-template-columns: 1fr;

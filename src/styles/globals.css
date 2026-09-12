@@ -129,14 +129,18 @@ body {
     flex: 1;
 }
 
+.main-header div:first-child {
+    flex: 1 1 10vh;
+}
+
 .main-header div:last-child {
+    flex: 1 1 40vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-image: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
     color: var(--clr-bg-alt);
     position: relative;
-    z-index: 10;
     padding: 2em 1.5em;
     gap: var(--gap-small);
 }
@@ -164,7 +168,7 @@ body {
     }
 }
 
-@media (min-width: 45em) {
+@media (min-width: 64em) {
     .main-header div:first-child {
         flex: 0 0 30%; 
     }

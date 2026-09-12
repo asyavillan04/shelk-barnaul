@@ -1,137 +1,147 @@
+// =============================================
+// Утилиты
+// =============================================
 
+function addSwipe(element, onLeft, onRight) {
+    if (!element) return;
 
-// --- Контактная форма ---
+    let startX = 0;
+    let startY = 0;
+    let isSwiping = false;
+
+    const threshold = 40;
+    const angleLimit = 45;
+
+    element.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        startX = touch.clientX;
+        startY = touch.clientY;
+        isSwiping = false;
+    }, { passive: true });
+
+    element.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+
+        if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 20) {
+            isSwiping = false;
+            return;
+        }
+        isSwiping = true;
+    }, { passive: true });
+
+    element.addEventListener('touchend', (e) => {
+        if (!isSwiping) return;
+        const touch = e.changedTouches[0];
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+
+        if (Math.abs(dy) > Math.abs(dx) * Math.tan(angleLimit * Math.PI / 180)) return;
+        if (Math.abs(dx) < threshold) return;
+
+        if (dx < 0) onLeft();
+        else onRight();
+    });
+}
+
+// =============================================
+// Контактная форма
+// =============================================
 const form = document.getElementById('contact-form');
 const phone = document.getElementById('phone');
 const consent = document.getElementById('consent');
 const feedback = document.getElementById('form-feedback');
 
 if (form) {
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    // Сброс ошибок
-    document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
-    let isValid = true;
+        document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+        let isValid = true;
 
-    // Проверка телефона
-    if (!phone.value.trim()) {
-      document.getElementById('phone-error').textContent = 'Заполните номер телефона';
-      document.getElementById('phone-error').style.display = 'block';
-      isValid = false;
-    }
+        if (!phone.value.trim()) {
+            document.getElementById('phone-error').textContent = 'Заполните номер телефона';
+            document.getElementById('phone-error').style.display = 'block';
+            isValid = false;
+        }
 
-    // Проверка согласия
-    if (!consent.checked) {
-      document.getElementById('consent-error').textContent = 'Необходимо согласие на обработку персональных данных';
-      document.getElementById('consent-error').style.display = 'block';
-      isValid = false;
-    }
+        if (!consent.checked) {
+            document.getElementById('consent-error').textContent = 'Необходимо согласие на обработку персональных данных';
+            document.getElementById('consent-error').style.display = 'block';
+            isValid = false;
+        }
 
-    if (!isValid) return;
+        if (!isValid) return;
 
-    // Отправка через Formspree
-    const formData = new FormData(form);
-    try {
-      const response = await fetch('https://formspree.io/f/FORM_ID', {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
+        const formData = new FormData(form);
+        try {
+            const response = await fetch('https://formspree.io/f/FORM_ID', {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
 
-      if (response.ok) {
-        form.reset();
-        feedback.textContent = 'Спасибо! Ваше сообщение отправлено.';
-        feedback.style.color = 'green';
-      } else {
-        throw new Error('Ошибка сервера');
-      }
-    } catch (error) {
-      feedback.textContent = 'Произошла ошибка. Попробуйте позже.';
-      feedback.style.color = 'red';
-    }
-  });
+            if (response.ok) {
+                form.reset();
+                feedback.textContent = 'Спасибо! Ваше сообщение отправлено.';
+                feedback.style.color = 'green';
+            } else {
+                throw new Error('Ошибка сервера');
+            }
+        } catch (error) {
+            feedback.textContent = 'Произошла ошибка. Попробуйте позже.';
+            feedback.style.color = 'red';
+        }
+    });
 }
 
+// =============================================
 // Копирование ID
+// =============================================
 document.querySelectorAll('.copy-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const targetId = btn.dataset.target;
-    const text = document.getElementById(targetId)?.textContent.trim();
-    if (!text) return;
-    navigator.clipboard.writeText(text).then(() => {
-      btn.textContent = '✓';
-      btn.classList.add('copied');
-      setTimeout(() => {
-        btn.textContent = 'К';
-        btn.classList.remove('copied');
-      }, 2000);
-    }).catch(err => console.error('Ошибка копирования:', err));
-  });
+    btn.addEventListener('click', () => {
+        const targetId = btn.dataset.target;
+        const text = document.getElementById(targetId)?.textContent.trim();
+        if (!text) return;
+        navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = '✓';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'К';
+                btn.classList.remove('copied');
+            }, 2000);
+        }).catch(err => console.error('Ошибка копирования:', err));
+    });
 });
 
-// --- Карусель ---
-
+// =============================================
+// Карусель изображений
+// =============================================
 const carouselTrack = document.querySelector('.images-carousel');
 const carouselViewport = document.querySelector('.carousel-viewport');
 const indicatorsContainer = document.querySelector('.dot-indicators');
 
 const imageVariants = [
     {
-        avif: {
-            small: './assets/home-images/home-1-small.avif',
-            large: './assets/home-images/home-1-large.avif'
-        },
-        webp: {
-            small: './assets/home-images/home-1-small.webp',
-            large: './assets/home-images/home-1-large.webp'
-        },
-        jpeg: {
-            small: './assets/home-images/home-1-small.jpeg',
-            large: './assets/home-images/home-1-large.jpeg'
-        }
+        avif: { small: './assets/home-images/home-1-small.avif', large: './assets/home-images/home-1-large.avif' },
+        webp: { small: './assets/home-images/home-1-small.webp', large: './assets/home-images/home-1-large.webp' },
+        jpeg: { small: './assets/home-images/home-1-small.jpeg', large: './assets/home-images/home-1-large.jpeg' }
     },
     {
-        avif: {
-            small: './assets/home-images/home-2-small.avif',
-            large: './assets/home-images/home-2-large.avif'
-        },
-        webp: {
-            small: './assets/home-images/home-2-small.webp',
-            large: './assets/home-images/home-2-large.webp'
-        },
-        jpeg: {
-            small: './assets/home-images/home-2-small.jpeg',
-            large: './assets/home-images/home-2-large.jpeg'
-        }
+        avif: { small: './assets/home-images/home-2-small.avif', large: './assets/home-images/home-2-large.avif' },
+        webp: { small: './assets/home-images/home-2-small.webp', large: './assets/home-images/home-2-large.webp' },
+        jpeg: { small: './assets/home-images/home-2-small.jpeg', large: './assets/home-images/home-2-large.jpeg' }
     },
     {
-        avif: {
-            small: './assets/home-images/home-3-small.avif',
-            large: './assets/home-images/home-3-large.avif'
-        },
-        webp: {
-            small: './assets/home-images/home-3-small.webp',
-            large: './assets/home-images/home-3-large.webp'
-        },
-        jpeg: {
-            small: './assets/home-images/home-3-small.jpg',
-            large: './assets/home-images/home-3-large.jpg'
-        }
+        avif: { small: './assets/home-images/home-3-small.avif', large: './assets/home-images/home-3-large.avif' },
+        webp: { small: './assets/home-images/home-3-small.webp', large: './assets/home-images/home-3-large.webp' },
+        jpeg: { small: './assets/home-images/home-3-small.jpg', large: './assets/home-images/home-3-large.jpg' }
     },
     {
-        avif: {
-            small: './assets/home-images/home-4-small.avif',
-            large: './assets/home-images/home-4-large.avif'
-        },
-        webp: {
-            small: './assets/home-images/home-4-small.webp',
-            large: './assets/home-images/home-4-large.webp'
-        },
-        jpeg: {
-            small: './assets/home-images/home-4-small.jpg',
-            large: './assets/home-images/home-4-large.jpg'
-        }
+        avif: { small: './assets/home-images/home-4-small.avif', large: './assets/home-images/home-4-large.avif' },
+        webp: { small: './assets/home-images/home-4-small.webp', large: './assets/home-images/home-4-large.webp' },
+        jpeg: { small: './assets/home-images/home-4-small.jpg', large: './assets/home-images/home-4-large.jpg' }
     }
 ];
 
@@ -141,38 +151,25 @@ if (carouselTrack && totalSlides) {
     carouselTrack.innerHTML = '';
     indicatorsContainer.innerHTML = '';
 
-    // Функция создания слайда
     function createSlide(variant, realIndex) {
         const picture = document.createElement('picture');
         picture.dataset.index = realIndex;
 
-        // Источник AVIF 
         const sourceAvif = document.createElement('source');
         sourceAvif.type = 'image/avif';
-        sourceAvif.srcset = `
-            ${variant.avif.small} 480w,
-            ${variant.avif.large} 1200w
-        `;
+        sourceAvif.srcset = `${variant.avif.small} 480w, ${variant.avif.large} 1200w`;
         sourceAvif.sizes = '(max-width: 600px) 480px, 1200px';
         picture.appendChild(sourceAvif);
 
-        // Источник WebP (если AVIF не поддерживается)
         const sourceWebp = document.createElement('source');
         sourceWebp.type = 'image/webp';
-        sourceWebp.srcset = `
-            ${variant.webp.small} 480w,
-            ${variant.webp.large} 1200w
-        `;
+        sourceWebp.srcset = `${variant.webp.small} 480w, ${variant.webp.large} 1200w`;
         sourceWebp.sizes = '(max-width: 600px) 480px, 1200px';
         picture.appendChild(sourceWebp);
 
-        // Fallback на JPEG (если ни AVIF, ни WebP не поддерживаются)
         const img = document.createElement('img');
-        img.src = variant.jpeg.large;               // базовый src
-        img.srcset = `
-            ${variant.jpeg.small} 480w,
-            ${variant.jpeg.large} 1200w
-        `;
+        img.src = variant.jpeg.large;
+        img.srcset = `${variant.jpeg.small} 480w, ${variant.jpeg.large} 1200w`;
         img.sizes = '(max-width: 600px) 480px, 1200px';
         img.alt = '';
         picture.appendChild(img);
@@ -180,14 +177,12 @@ if (carouselTrack && totalSlides) {
         return picture;
     }
 
-    // Трек: [клон последнего, 0, 1, 2, ..., клон первого]
     const lastClone = createSlide(imageVariants[totalSlides - 1], totalSlides - 1);
     const firstClone = createSlide(imageVariants[0], 0);
     carouselTrack.appendChild(lastClone);
     imageVariants.forEach((variant, idx) => carouselTrack.appendChild(createSlide(variant, idx)));
     carouselTrack.appendChild(firstClone);
 
-    // Точки для реальных слайдов
     for (let i = 0; i < totalSlides; i++) {
         const btn = document.createElement('button');
         btn.setAttribute('role', 'tab');
@@ -197,15 +192,14 @@ if (carouselTrack && totalSlides) {
         indicatorsContainer.appendChild(btn);
     }
 
-    const allSlides = [...carouselTrack.children];   // теперь это <picture>
+    const allSlides = [...carouselTrack.children];
     const indicators = [...indicatorsContainer.children];
-    let currentIndex = 1;        // в allSlides: 0 – клон последнего, 1..totalSlides – настоящие, totalSlides+1 – клон первого
+    let currentIndex = 1;
     let isTransitioning = false;
     let step = 0;
     let viewportWidth = 0;
     let slideWidth = 0;
 
-    // Пересчёт размеров
     function updateSizes() {
         if (!carouselViewport || allSlides.length < 2) return;
         viewportWidth = carouselViewport.offsetWidth;
@@ -213,7 +207,6 @@ if (carouselTrack && totalSlides) {
         step = allSlides[1].getBoundingClientRect().left - allSlides[0].getBoundingClientRect().left;
     }
 
-    // Центрирование слайда с индексом в полном массиве
     function centerSlide(index) {
         updateSizes();
         if (step === 0) return;
@@ -221,7 +214,6 @@ if (carouselTrack && totalSlides) {
         carouselTrack.style.transform = `translateX(${-step * index + offset}px)`;
     }
 
-    // Обновление классов прозрачности и индикаторов на основе текущего реального индекса
     function updateActiveClasses() {
         const realActive = (currentIndex - 1 + totalSlides) % totalSlides;
 
@@ -261,25 +253,23 @@ if (carouselTrack && totalSlides) {
         goToSlide(realIndex + 1);
     }
 
-    // Бесшовный прыжок после завершения анимации
     carouselTrack.addEventListener('transitionend', () => {
         isTransitioning = false;
         const totalAll = allSlides.length;
 
-        if (currentIndex === 0) {   // на клоне последнего
+        if (currentIndex === 0) {
             carouselTrack.style.transition = 'none';
-            currentIndex = totalAll - 2;   // реальный последний
+            currentIndex = totalAll - 2;
             centerSlide(currentIndex);
             updateActiveClasses();
-        } else if (currentIndex === totalAll - 1) {   // на клоне первого
+        } else if (currentIndex === totalAll - 1) {
             carouselTrack.style.transition = 'none';
-            currentIndex = 1;   // реальный первый
+            currentIndex = 1;
             centerSlide(currentIndex);
             updateActiveClasses();
         }
     });
 
-    // Клик по слайду
     carouselTrack.addEventListener('click', (e) => {
         const picture = e.target.closest('picture');
         if (!picture) return;
@@ -290,7 +280,13 @@ if (carouselTrack && totalSlides) {
         }
     });
 
-    // Инициализация
+    // Swipe для карусели изображений
+    addSwipe(
+        carouselViewport,
+        () => goToSlide(currentIndex + 1),
+        () => goToSlide(currentIndex - 1)
+    );
+
     function initCarousel() {
         updateSizes();
         if (step === 0) return;
@@ -303,14 +299,12 @@ if (carouselTrack && totalSlides) {
     window.addEventListener('load', initCarousel);
     if (document.readyState === 'complete') initCarousel();
 
-    // Ресайз
     window.addEventListener('resize', () => {
         updateSizes();
         carouselTrack.style.transition = 'none';
         centerSlide(currentIndex);
     });
 
-    // Автопрокрутка
     let autoplay;
     function startAutoplay() {
         autoplay = setInterval(() => goToSlide(currentIndex + 1), 5000);
@@ -323,12 +317,13 @@ if (carouselTrack && totalSlides) {
     startAutoplay();
 }
 
-// --- Карусель отзывов ---
+// =============================================
+// Карусель отзывов
+// =============================================
 const reviewsTrack = document.querySelector('.reviews-carousel');
 const reviewsViewport = document.querySelector('.reviews-carousel-wrapper');
 const reviewsIndicatorsContainer = document.querySelector('.reviews-controls.dot-indicators');
 
-// Исходные изображения
 const reviewImages = [
     'assets/reviews/review-1.jpg',
     'assets/reviews/review-2.jpg',
@@ -343,7 +338,6 @@ if (reviewsTrack && totalReviews) {
     reviewsTrack.innerHTML = '';
     reviewsIndicatorsContainer.innerHTML = '';
 
-    // Создаём слайд
     function createReviewSlide(src, realIndex) {
         const div = document.createElement('div');
         const img = document.createElement('img');
@@ -354,14 +348,12 @@ if (reviewsTrack && totalReviews) {
         return div;
     }
 
-    // Трек: [клон последнего, 0, 1, 2, ..., 5, клон первого]
     const lastClone = createReviewSlide(reviewImages[totalReviews - 1], totalReviews - 1);
     const firstClone = createReviewSlide(reviewImages[0], 0);
     reviewsTrack.appendChild(lastClone);
     reviewImages.forEach((src, idx) => reviewsTrack.appendChild(createReviewSlide(src, idx)));
     reviewsTrack.appendChild(firstClone);
 
-    // Точки
     for (let i = 0; i < totalReviews; i++) {
         const btn = document.createElement('button');
         btn.setAttribute('role', 'tab');
@@ -373,7 +365,7 @@ if (reviewsTrack && totalReviews) {
 
     const allSlides = [...reviewsTrack.children];
     const indicators = [...reviewsIndicatorsContainer.children];
-    let currentIndex = 1;      // реальный первый (индекс 1)
+    let currentIndex = 1;
     let isTransitioning = false;
     let step = 0;
     let viewportWidth = 0;
@@ -411,7 +403,6 @@ if (reviewsTrack && totalReviews) {
         goToSlide(realIndex + 1);
     }
 
-    // Обновление только точек
     function updateIndicators() {
         const realActive = (currentIndex - 1 + totalReviews) % totalReviews;
         indicators.forEach((btn, i) => {
@@ -419,7 +410,6 @@ if (reviewsTrack && totalReviews) {
         });
     }
 
-    // Бесшовный прыжок
     reviewsTrack.addEventListener('transitionend', () => {
         isTransitioning = false;
         const totalAll = allSlides.length;
@@ -436,7 +426,6 @@ if (reviewsTrack && totalReviews) {
         }
     });
 
-    // Клик по слайду — переход на тот, по которому кликнули
     reviewsTrack.addEventListener('click', (e) => {
         const slide = e.target.closest('div[data-index]');
         if (!slide) return;
@@ -447,7 +436,13 @@ if (reviewsTrack && totalReviews) {
         }
     });
 
-    // Инициализация
+    // Swipe для карусели отзывов
+    addSwipe(
+        reviewsViewport,
+        () => goToSlide(currentIndex + 1),
+        () => goToSlide(currentIndex - 1)
+    );
+
     function initReviewsCarousel() {
         updateSizes();
         if (step === 0) return;
@@ -460,14 +455,12 @@ if (reviewsTrack && totalReviews) {
     window.addEventListener('load', initReviewsCarousel);
     if (document.readyState === 'complete') initReviewsCarousel();
 
-    // Ресайз
     window.addEventListener('resize', () => {
         updateSizes();
         reviewsTrack.style.transition = 'none';
         centerSlide(currentIndex);
     });
 
-    // Автоплей
     let autoplay;
     function startAutoplay() {
         autoplay = setInterval(() => goToSlide(currentIndex + 1), 10000);
@@ -480,36 +473,37 @@ if (reviewsTrack && totalReviews) {
     startAutoplay();
 }
 
+// =============================================
 // Модальное окно с политикой
+// =============================================
 const policyModal = document.getElementById('policy-modal');
 const openPolicyBtn = document.getElementById('open-policy');
 const closeModalBtn = policyModal?.querySelector('.modal-close');
 
-// Открытие
 openPolicyBtn?.addEventListener('click', (e) => {
-    e.preventDefault(); // чтобы ссылка не перезагружала страницу
+    e.preventDefault();
     policyModal.classList.add('open');
 });
 
-// Закрытие по кнопке
 closeModalBtn?.addEventListener('click', () => {
     policyModal.classList.remove('open');
 });
 
-// Закрытие по клику вне окна
 policyModal?.addEventListener('click', (e) => {
     if (e.target === policyModal) {
         policyModal.classList.remove('open');
     }
 });
 
-// Закрытие по Escape
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && policyModal?.classList.contains('open')) {
         policyModal.classList.remove('open');
     }
 });
 
+// =============================================
+// Аккордеон прайса
+// =============================================
 document.querySelectorAll('.pricelist-zone').forEach(zone => {
     const heading = zone.querySelector('.pricelist-heading');
     if (!heading) return;
