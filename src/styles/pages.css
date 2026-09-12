@@ -691,7 +691,8 @@ header > div:first-child::after {
     padding-top: 2rem;
 }
 
-body::before {
+/* фон */
+body.price-page::before {
     content: '';
     position: absolute;
     top: 0;
@@ -707,45 +708,128 @@ body::before {
     will-change: transform;
 }
 
-.warnings {
-    background-color: var(--clr-bg-alt);
-    border-radius: var(--border-radius);
-    width: max-content;
-    margin: auto 0;
-}
-
-.pricelist-heading,
-.service-line {
+/* Главный заголовок страницы */
+.pricelist-title {
     display: grid;
-    grid-template-columns: 1fr 40vw 40vw 1fr;
-}
-
-.pricelist > div > h2,
-.pricelist > div > h3 {
-    grid-column: 2 / 3;
-}
-
-.pricelist > div > h2 {
-    padding: 0.5em 0;
-}
-
-.pricelist-heading {
+    grid-template-columns: 1fr 80vw 1fr;
     background-image: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
     color: var(--clr-bg-alt);
     padding: 1em 0;
 }
 
-.service-line {
-    grid-template-columns: 1fr 40vw 40vw 1fr;
-    background: linear-gradient(
-    to right,
-    hsl(var(--h), var(--s), var(--l), 1) 0%,
-    hsla(var(--h), var(--s), var(--l), 0.6) 100%); 
-    padding: 0.7em 0;
+.pricelist-title > h2 {
+    grid-column: 2 / 3;
+    margin: 0;
 }
+
+/* Блок предупреждений */
+.warnings {
+    background-color: var(--clr-bg-alt);
+    border-radius: var(--border-radius);
+    width: max-content;
+    margin: 1em 0;
+    padding: 1em;
+    box-shadow: var(--shadow);
+}
+
+/* -------------------------- */
+/* Аккордеон зон              */
+/* -------------------------- */
+
+.pricelist-zone {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    transition: grid-template-rows 0.4s ease;
+    margin-bottom: var(--gap-small);
+}
+
+.pricelist-zone[data-collapsed="true"] {
+    grid-template-rows: auto 0fr;
+}
+
+.pricelist-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+    overflow: hidden;
+    min-height: 0;
+    padding-top: var(--gap-small);
+}
+
+/* Кнопка-заголовок зоны */
+.pricelist-heading {
+    display: grid;
+    grid-template-columns: 1fr 40vw auto 1fr;
+    align-items: center;
+    width: 100%;
+    padding: 1em 0;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+    background-image: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
+    color: var(--clr-bg-alt);
+    border-radius: var(--border-radius);
+}
+
+.pricelist-heading h3 {
+    grid-column: 2 / 3;
+    margin: 0;
+}
+
+.pricelist-heading .arrow {
+    grid-column: 3 / 4;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition: transform 0.3s ease;
+}
+
+.pricelist-zone:not([data-collapsed="true"]) .pricelist-heading .arrow {
+    transform: rotate(180deg);
+}
+
+/* Строки услуг */
+.service-line {
+    display: grid;
+    grid-template-columns: 1fr 40vw 40vw 1fr;
+    padding: 0.7em 0;
+    border-radius: var(--border-radius);
+    background: linear-gradient(
+        to right,
+        hsl(var(--h), var(--s), var(--l), 1) 0%,
+        hsla(var(--h), var(--s), var(--l), 0.6) 100%
+    );
+
+    /* Появление снизу вверх */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.pricelist-zone:not([data-collapsed="true"]) .service-line {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Каскадные задержки */
+.pricelist-zone:not([data-collapsed="true"]) .service-line:nth-child(1) { transition-delay: 0.05s; }
+.pricelist-zone:not([data-collapsed="true"]) .service-line:nth-child(2) { transition-delay: 0.10s; }
+.pricelist-zone:not([data-collapsed="true"]) .service-line:nth-child(3) { transition-delay: 0.15s; }
+.pricelist-zone:not([data-collapsed="true"]) .service-line:nth-child(4) { transition-delay: 0.20s; }
+.pricelist-zone:not([data-collapsed="true"]) .service-line:nth-child(5) { transition-delay: 0.25s; }
+.pricelist-zone:not([data-collapsed="true"]) .service-line:nth-child(6) { transition-delay: 0.30s; }
+.pricelist-zone:not([data-collapsed="true"]) .service-line:nth-child(7) { transition-delay: 0.35s; }
+.pricelist-zone:not([data-collapsed="true"]) .service-line:nth-child(8) { transition-delay: 0.40s; }
+
+.service-line p {
+    margin: 0;
+}
+
 .service-line p:first-child {
     grid-column: 2 / 3;
 }
+
 .service-line p:last-child {
     grid-column: 3 / 4;
 }

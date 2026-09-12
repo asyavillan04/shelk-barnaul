@@ -509,3 +509,14 @@ document.addEventListener('keydown', (e) => {
         policyModal.classList.remove('open');
     }
 });
+
+document.querySelectorAll('.pricelist-zone').forEach(zone => {
+    const heading = zone.querySelector('.pricelist-heading');
+    if (!heading) return;
+
+    heading.addEventListener('click', () => {
+        const isCollapsed = zone.dataset.collapsed === 'true';
+        zone.dataset.collapsed = isCollapsed ? 'false' : 'true';
+        heading.setAttribute('aria-expanded', isCollapsed ? 'true' : 'false');
+    });
+});
