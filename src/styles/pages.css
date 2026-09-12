@@ -143,19 +143,38 @@ section {
 }
 
 
-header > div:first-child::after {
+/* Лаванда сверху секции */
+.has-lavender {
+    position: relative;
+}
+
+.has-lavender::before {
     content: '';
     position: absolute;
-    top: 4rem;
+    bottom: 100%;         /* низ лаванды = верх секции */
     left: 0;
-    width: 100%;
-    height: 100%; 
+    width: 70vw;
+    height: 30vh;
     background-image: url('../assets/decorations/lavender-header-desktop.png');
-    background-size: auto 100%;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom left;
-    z-index: 1;
+    z-index: 2;
     pointer-events: none;
+}
+
+@media (min-width: 35em) {
+    .has-lavender::before {
+        width: 45vw;
+        height: 35vh;
+    }
+}
+
+@media (min-width: 64em) {
+    .has-lavender::before {
+        width: 32vw;
+        height: 40vh;
+    }
 }
 
 /* ------------------- */
