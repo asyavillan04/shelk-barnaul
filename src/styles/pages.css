@@ -322,6 +322,9 @@ section {
         'content content content'
         '. tabs .';
     grid-template-columns: 1fr 80vw 1fr;
+    background: var(--clr-purple-dark);
+    color: var(--clr-bg-alt);
+    padding-block: var(--gap-medium);
 }
 
 .reviews-carousel-wrapper {

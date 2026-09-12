@@ -66,17 +66,17 @@ html {
 }
 
 .reviews-controls > * {
-    border-color: var(--clr-purple-dark);
+    border-color: var(--clr-bg);
 }
 
 .reviews-controls > *:hover,
-.reviews-controls > *:focus {
-    background-color: var(--clr-bg-alt);
+.reviews-controls > *:focus-visible {
+    background-color: var(--clr-purple);
+    border-color: var(--clr-bg-alt);
 }
 
 .reviews-controls > [aria-selected="true"] {
-    background-color: var(--clr-purple);
-    border-color: var(--clr-purple-darkest); 
+    background-color: var(--clr-bg-alt); 
 }
 
 .reviews-carousel,
