@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Лазерная эпиляция для мужчин в Барнауле: удаление волос на теле, спине, зоне бикини. Современное оборудование. Цены и запись.">
-    <title>Студия Шёлк | Лазерная эпиляция (мужчинам)</title>  
+    <meta name="description" content="Лазерная эпиляция для женщин в студии «Шёлк» в Барнауле: безболезненно, эффективно, надолго. Цены на лазер. Запись онлайн.">
+    <title>Лазерная эпиляция (женщинам) | Студия "Шёлк"</title>
+
 
     <link rel="stylesheet" href="./styles/index.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="index.js" defer></script>
 </head>
 <body class="flow lazer-page price-page">
@@ -21,15 +26,18 @@
     </header>
 
     <main class="pricelist flow">
-        <div class="pricelist-title">
+        <div class="pricelist-title has-lavender">
             <h2>Лазерная эпиляция (женщинам)</h2>
         </div>
-
-        <div class="warnings flow flow--space-small">
-            <h3>Важно!</h3>
-            <p>Противопоказания</p>
-            <p>Подготовка к процедуре</p>
-        </div>
+    <div class="warnings">
+        <h3>Важно!</h3>
+        <button type="button" class="warnings-link" data-modal="modal-contraindications">
+            Противопоказания
+        </button>
+        <button type="button" class="warnings-link" data-modal="modal-preparation">
+            Подготовка к процедуре
+        </button>
+    </div>
 
         <!-- Лицо -->
         <div class="pricelist-zone" data-collapsed="true">
@@ -135,5 +143,37 @@
             </div>
         </div>
     </main>
+
+    <div class="modal" id="modal-contraindications" role="dialog" aria-modal="true" aria-labelledby="modal-contraindications-title">
+    <div class="modal-content">
+        <button type="button" class="modal-close" aria-label="Закрыть">×</button>
+        <h3 id="modal-contraindications-title" class="uppercase">Противопоказания</h3>
+        <p>- Кожные заболевания в острой или хронической форме (псориаз, экзема и др.)</p>
+        <p>- Порезы, ранки и другие нарушения целостности кожного покрова</p>
+        <p>- Сахарный диабет</p>
+        <p>- Герпес в стадии обострения</p>
+        <p>- Онкологические заболевания</p>
+        <p>- Варикозное расширение вен на месте обработки лазером</p>
+        <p>- Наличие выпуклых родинок и татуировок на обрабатываемом участке</p>
+        <p>- Простудные вирусные инфекции (грипп, ОРВИ и т.д.)</p>
+        <p>- Аллергия в обострённом виде и с реакцией на кожном покрове</p>
+        <p>- Свежий загар, естественный или приобретённый в солярии</p>
+        <p>- Беременность</p>
+        <p>- Приём антибиотиков и некоторых гормональных препаратов</p>
+    </div>
+</div>
+
+<div class="modal" id="modal-preparation" role="dialog" aria-modal="true" aria-labelledby="modal-preparation-title">
+    <div class="modal-content">
+        <button type="button" class="modal-close" aria-label="Закрыть">×</button>
+        <h3 id="modal-preparation-title" class="uppercase">Подготовка к эпиляции:</h3>
+        <p>✔нельзя загорать 2-3 дня до процедуры, исключить бани, сауны, горячие ванны. </p>
+        <p>✔нельзя выдергивать волосы за 2 недели до процедуры: воск, шугаринг, пинцет, эпилятор.</p>
+        <p>✔нельзя наносить на  кожу масло и спиртосодержащие средства в день процедуры и пользоваться дезодорантом</p>
+        <p>✔за 1 день (минимум 4 часа) до процедуры зону эпиляции следует тщательно выбрить или использовать крем для депиляции. На лице не брить, триммер или крем. Если нет, то на месте триммером уберём.</p>
+        <p>✔за неделю до процедуры нужно прекратить приём Антибиотиков.</p>
+    </div>
+</div>
+
 </body>
 </html>

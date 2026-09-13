@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Студия эстетики тела «Шёлк» в Барнауле. Массаж, обёртывания, уход за лицом и телом. Запись онлайн или по телефону.">
+    <meta name="description" content="Студия эстетики тела «Шёлк» в Барнауле. Лазерная эпиляция, вакуумный массаж, уход за лицом и телом. Запись онлайн или по телефону.">
     <title> Студия Шёлк | Главная </title>
 
     <link rel="stylesheet" href="./styles/index.css">
@@ -107,102 +107,89 @@
 
 <section id="contacts" class="contacts flow" aria-labelledby="contact-heading">
     <h2 id="contact-heading" class="uppercase">Контакты</h2>
-    <p>Соцсети студии</p>
-    <div class="contacts-layout">
-<div class="contact-cards">
-  <!-- Телефон -->
-  <div class="contact-card">
-    <img src="assets/social/558022.svg" alt="Телефон" width="48" height="48" class="contact-card-icon">
-    <div class="contact-card-info">
-      <div class="contact-card-row">
-        <a href="tel:+79000000000" class="contact-card-btn">Позвонить</a>
-      </div>
-      <div class="contact-card-row">
-        <span class="contact-card-id" id="phone-id">+7 (900) 000-00-00</span>
-        <button class="contact-card-btn copy-btn" data-target="phone-id"></button>
-      </div>
-    </div>
-  </div>
+    <div class="contacts-content">
+        <p>Соцсети студии</p>
 
-  <!-- ВКонтакте -->
-  <div class="contact-card">
-    <img src="assets/social/logo-vk.svg" alt="ВКонтакте" width="48" height="48" class="contact-card-icon">
-    <div class="contact-card-info">
-      <div class="contact-card-row">
-        <a href="https://vk.com/студия_шёлк" target="_blank" rel="noopener noreferrer" class="contact-card-btn">Перейти в ВК</a>
-      </div>
-      <div class="contact-card-row">
-        <span class="contact-card-id" id="vk-id">vk.com/студия_шёлк</span>
-        <button class="contact-card-btn copy-btn" data-target="vk-id"></button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Макс -->
-  <div class="contact-card">
-    <img src="assets/social/logo_max.svg" alt="Мессенджер Макс" width="48" height="48" class="contact-card-icon">
-    <div class="contact-card-info">
-      <div class="contact-card-row">
-        <a href="https://t.me/max_studio" target="_blank" rel="noopener noreferrer" class="contact-card-btn">Перейти в Макс</a>
-      </div>
-      <div class="contact-card-row">
-        <span class="contact-card-id" id="max-id">@max_studio</span>
-        <button class="contact-card-btn copy-btn" data-target="max-id"></button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Копирование ID
-  document.querySelectorAll('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.dataset.target;
-      const text = document.getElementById(targetId)?.textContent.trim();
-      if (!text) return;
-      navigator.clipboard.writeText(text).then(() => {
-        btn.textContent = '✓';
-        btn.classList.add('copied');
-        setTimeout(() => {
-          btn.textContent = 'К';
-          btn.classList.remove('copied');
-        }, 2000);
-      }).catch(err => console.error('Ошибка копирования:', err));
-    });
-  });
-</script>
-    <form id="contact-form" class="contact-form" action="https://formspree.io/f/moeqynnl"
-  method="POST" novalidate>
-        <div class="form-columns">
-            <div class="form-column form-column--contacts">
-                <div class="form-group">
-                    <label for="name">Имя</label>
-                    <input type="text" id="name" name="name" placeholder="Ваше имя" required>
-                    <span class="error-message" id="name-error"></span>
+        <div class="contacts-layout">
+            <div class="contact-cards">
+                <!-- Телефон -->
+                <div class="contact-card">
+                    <img src="assets/social/558022.svg" alt="Телефон" width="48" height="48" class="contact-card-icon">
+                    <div class="contact-card-info">
+                        <div class="contact-card-row">
+                            <a href="tel:+79000000000" class="contact-card-btn">Позвонить</a>
+                        </div>
+                        <div class="contact-card-row">
+                            <span class="contact-card-id" id="phone-id">+7 (900) 000-00-00</span>
+                            <button type="button" class="contact-card-btn copy-btn" data-target="phone-id" aria-label="Скопировать номер телефона"></button>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="phone">Телефон</label>
-                    <input type="tel" id="phone" name="phone" placeholder="+7 900 000-00-00" required>
-                    <span class="error-message" id="phone-error"></span>
+
+                <!-- ВКонтакте -->
+                <div class="contact-card">
+                    <img src="assets/social/logo-vk.svg" alt="ВКонтакте" width="48" height="48" class="contact-card-icon">
+                    <div class="contact-card-info">
+                        <div class="contact-card-row">
+                            <a href="https://vk.com/студия_шёлк" target="_blank" rel="noopener noreferrer" class="contact-card-btn">Перейти в ВК</a>
+                        </div>
+                        <div class="contact-card-row">
+                            <span class="contact-card-id" id="vk-id">vk.com/студия_шёлк</span>
+                            <button type="button" class="contact-card-btn copy-btn" data-target="vk-id" aria-label="Скопировать адрес ВКонтакте"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Макс -->
+                <div class="contact-card">
+                    <img src="assets/social/logo_max.svg" alt="Мессенджер Макс" width="48" height="48" class="contact-card-icon">
+                    <div class="contact-card-info">
+                        <div class="contact-card-row">
+                            <a href="https://t.me/max_studio" target="_blank" rel="noopener noreferrer" class="contact-card-btn">Перейти в Макс</a>
+                        </div>
+                        <div class="contact-card-row">
+                            <span class="contact-card-id" id="max-id">@max_studio</span>
+                            <button type="button" class="contact-card-btn copy-btn" data-target="max-id" aria-label="Скопировать ник в Максе"></button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-column form-column--message">
-                <div class="form-group">
-                    <label for="message">Комментарий</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Ваш вопрос или пожелание"></textarea>
+            <form id="contact-form" class="contact-form"
+                  action="https://formspree.io/f/moeqynnl"
+                  method="POST" novalidate>
+                <div class="form-columns">
+                    <div class="form-column form-column--contacts">
+                        <div class="form-group">
+                            <label for="name">Имя</label>
+                            <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+                            <span class="error-message" id="name-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+7 900 000-00-00" required>
+                            <span class="error-message" id="phone-error"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-column form-column--message">
+                        <div class="form-group">
+                            <label for="message">Комментарий</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Ваш вопрос или пожелание"></textarea>
+                        </div>
+                        <div class="form-group form-group--checkbox">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">Я согласен(на) на обработку <a href="#" id="open-policy">персональных данных</a></label>
+                            <span class="error-message" id="consent-error"></span>
+                        </div>
+                        <button type="submit" class="submit-btn">Отправить</button>
+                        <div id="form-feedback" class="form-feedback" role="status"></div>
+                    </div>
                 </div>
-                <div class="form-group form-group--checkbox">
-                    <input type="checkbox" id="consent" name="consent" required>
-                    <label for="consent">Я согласен(на) на обработку <a href="#" id="open-policy">персональных данных</a></label>
-                    <span class="error-message" id="consent-error"></span>
-                </div>
-                <button type="submit" class="submit-btn">Отправить</button>
-                <div id="form-feedback" class="form-feedback" role="status"></div>
-            </div>
+            </form>
         </div>
-    </form>
     </div>
+
     <!-- Модальное окно с политикой -->
     <div class="modal" id="policy-modal" role="dialog" aria-modal="true" aria-labelledby="policy-title">
         <div class="modal-content">
@@ -213,7 +200,6 @@
             </div>
         </div>
     </div>
-
 </section>
 
     </main>

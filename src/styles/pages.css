@@ -18,7 +18,7 @@ section {
         ". services ."
         "reviews reviews reviews"
         ". tech ."
-        ". contacts .";
+        "contacts contacts contacts";
     grid-template-columns: 1fr 90vw 1fr;
 }
 
@@ -54,7 +54,7 @@ section {
             ". services services ."
             "reviews reviews reviews reviews"
             ". tech tech ."
-            ". contacts contacts .";
+            "contacts contacts contacts contacts";
         grid-template-columns: 1fr 40vw 40vw 1fr;
     }
 
@@ -429,18 +429,41 @@ section {
 
 .contacts {
     grid-area: contacts;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 80vw 1fr;
+    grid-template-areas:
+        "heading heading heading"
+        ".       content .";
+    row-gap: var(--gap-medium);
+    padding-block: var(--gap-medium);
 }
 
-/* ===== Основная раскладка: соцсети + форма ===== */
+/* Заголовок — на всю ширину, с фиолетовым фоном */
+.contacts > h2 {
+    grid-area: heading;
+    background-image: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
+    color: var(--clr-bg-alt);
+    padding: 1em 10vw;
+    margin: 0;
+}
+
+/* Всё остальное содержимое — во внутреннем контейнере */
+.contacts > .contacts-content {
+    grid-area: content;
+    display: grid;
+    gap: var(--gap-medium);
+}
+
+.contacts-content > p {
+    margin: 0;
+}
+
+/* ===== Раскладка: соцсети + форма ===== */
 .contacts-layout {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
     align-items: start;
-    margin-top: 2rem;
 }
 
 /* ===== Соцсети ===== */
@@ -480,14 +503,13 @@ section {
 
 .contact-card-id {
     font-family: monospace;
-    background: rgba(0,0,0,0.04);
+    background: rgba(0, 0, 0, 0.04);
     padding: 0.2em 0.6em;
     border-radius: 4px;
     color: var(--clr-text);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    flex: 1;
 }
 
 .contact-card-btn {
@@ -505,49 +527,27 @@ section {
 }
 
 .contact-card-btn:hover {
-    background-color: var(--clr-purple-dark);
+    background-color: var(--clr-purple-darkest);
 }
 
 .copy-btn {
     height: 1.5em;
     aspect-ratio: 1;
+    padding: 0;
     background-image: url(../assets/social/icon-copy.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 60% auto;
     background-color: var(--clr-purple);
 }
+
 .copy-btn.copied {
     background-color: rgb(91, 145, 77);
 }
+
 /* ===== Форма ===== */
 .contact-form {
     width: 100%;
-}
-
-.contact-form {
-    width: 100%;
-    position: relative;
-}
-.contact-form::before {
-    content: '';
-    position: absolute;
-    top: -1rem; 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 2px;
-    background-color: var(--clr-purple-dark);
-    pointer-events: none;
-}
-@media (min-width: 64em) {
-    .contact-form::before {
-        top: 50%;
-        left: -1rem; 
-        transform: translateY(-50%);
-        width: 2px;
-        height: 80%;
-    }
 }
 
 .form-columns {
@@ -555,16 +555,16 @@ section {
     grid-template-columns: 1fr;
     gap: 1rem;
 }
+
 .form-column {
     display: contents;
 }
 
-/* ===== Группы полей ===== */
 .form-group {
     background-color: var(--clr-bg-alt);
     border-radius: var(--border-radius);
     padding: 1rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     width: 100%;
 }
 
@@ -592,7 +592,6 @@ section {
     outline: none;
 }
 
-/* ===== Чекбокс: чекбокс + label, ошибка на всю ширину ===== */
 .form-group--checkbox {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -623,12 +622,11 @@ section {
     grid-area: error;
 }
 
-/* ===== Кнопка ===== */
 .submit-btn {
     background: linear-gradient(to right, var(--clr-purple-darkest), var(--clr-purple));
     background-size: 200% 100%;
     background-position: right center;
-    transition: background-position 0.3s ease; /* изменение цвета за счёт сдвига градиента */
+    transition: background-position 0.3s ease;
 
     color: var(--clr-bg-alt);
     border: none;
@@ -656,35 +654,28 @@ section {
     grid-column: 1 / -1;
 }
 
-/* ===== Планшет (35em): сетка на 4 колонки ===== */
+/* ===== Планшет (35em) ===== */
 @media (min-width: 35em) {
     .form-columns {
         grid-template-columns: repeat(4, minmax(0, 1fr));
         grid-template-areas:
-            "name    name    phone   phone"
-            "comment comment comment comment"
+            "name     name     phone    phone"
+            "comment  comment  comment  comment"
             "checkbox checkbox checkbox submit"
             "feedback feedback feedback feedback";
         gap: 1rem;
     }
 
-    .form-column--contacts > .form-group:nth-child(1) {
-        grid-area: name;
-    }
-
-    .form-column--contacts > .form-group:nth-child(2) {
-        grid-area: phone;
-    }
+    .form-column--contacts > .form-group:nth-child(1) { grid-area: name; }
+    .form-column--contacts > .form-group:nth-child(2) { grid-area: phone; }
 
     .form-column--message > .form-group:not(.form-group--checkbox) {
         grid-area: comment;
     }
-
     .form-column--message > .form-group--checkbox {
         grid-area: checkbox;
         align-self: center;
     }
-
     .form-column--message > .submit-btn {
         grid-area: submit;
         width: 100%;
@@ -693,8 +684,15 @@ section {
     }
 }
 
-/* ===== Десктоп (64em): соцсети слева, форма справа ===== */
+/* ===== Десктоп (64em) ===== */
 @media (min-width: 64em) {
+    .contacts {
+        grid-template-columns: 1fr 40vw 40vw 1fr;
+        grid-template-areas:
+            "heading heading heading heading"
+            ".       content content .";
+    }
+
     .contacts-layout {
         grid-template-columns: 1fr 2fr;
         gap: 2rem;
@@ -706,15 +704,13 @@ section {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
     align-items: center;
     justify-content: center;
 }
 
-.modal.open {
-    display: flex;
-}
+.modal.open { display: flex; }
 
 .modal-content {
     background: var(--clr-bg-alt);
@@ -777,13 +773,92 @@ body.price-page::before {
 }
 
 /* Блок предупреждений */
+/* Блок предупреждений */
 .warnings {
     background-color: var(--clr-bg-alt);
     border-radius: var(--border-radius);
-    width: max-content;
-    margin: 1em 0;
-    padding: 1em;
+    padding: var(--gap-medium);
     box-shadow: var(--shadow);
+    
+    /* Акцентная полоса слева для привлечения внимания */
+    border-left: 4px solid var(--clr-purple-dark);
+    
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+    
+    /* Адаптивность: на мобильных занимает всю ширину, на десктопе ограничиваем */
+    width: 100%;
+    max-width: 400px; 
+    box-sizing: border-box;
+    margin: var(--gap-medium) 0;
+}
+
+.warnings h3 {
+    color: var(--clr-purple-darkest);
+    font-size: var(--fs-600);
+    margin: 0 0 var(--gap-small) 0;
+    font-weight: 700;
+}
+
+/* Кнопки внутри блока */
+.warnings-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    /* Размеры и отступы */
+    width: 100%;
+    padding: 0.8em 1.2em;
+    box-sizing: border-box;
+    
+    /* Оформление */
+    background-color: transparent;
+    border: 1px solid var(--clr-purple);
+    border-radius: calc(var(--border-radius) / 1.5);
+    color: var(--clr-purple-dark);
+    
+    /* Типографика */
+    font-size: var(--fs-400);
+    font-weight: 500;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    
+    /* Плавные переходы */
+    transition: all 0.3s ease;
+}
+
+/* Стрелочка вниз (указывает на открытие модального окна) */
+.warnings-link::after {
+    content: '';
+    display: inline-block;
+    width: 0.4em;
+    height: 0.4em;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg); /* Поворот для стрелочки вниз */
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    flex-shrink: 0;
+    margin-left: var(--gap-small);
+}
+
+/* Эффект при наведении */
+.warnings-link:hover {
+    background-color: var(--clr-purple);
+    color: var(--clr-bg-alt);
+    border-color: var(--clr-purple);
+}
+
+/* Эффект при нажатии */
+.warnings-link:active {
+    transform: scale(0.98);
+}
+
+/* Фокус для доступности (клавиатура) */
+.warnings-link:focus-visible {
+    outline: 2px solid var(--clr-purple-darkest);
+    outline-offset: 2px;
 }
 
 /* -------------------------- */
@@ -885,4 +960,56 @@ body.price-page::before {
 
 .service-line p:last-child {
     grid-column: 3 / 4;
+}
+
+/* Контейнер для выравнивания ссылки */
+.breadcrumb {
+    display: grid;
+    /* Используем ту же сетку, что и у .pricelist-title, для идеального выравнивания по левому краю контента */
+    grid-template-columns: 1fr 80vw 1fr; 
+    margin-top: var(--gap-small); /* Небольшой отступ от заголовка */
+    margin-bottom: -1rem; /* Немного подтягиваем блок "Важно!" наверх */
+}
+
+/* Сама ссылка */
+.back-link {
+    grid-column: 2 / 3; /* Встает ровно под текстом заголовка */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    
+    /* Цвета и шрифты из ваших переменных */
+    color: var(--clr-purple-dark);
+    text-decoration: none;
+    font-size: var(--fs-400);
+    font-weight: 500;
+    font-family: inherit;
+    
+    /* Плавные переходы */
+    transition: color 0.3s ease, transform 0.3s ease;
+    width: fit-content;
+}
+
+/* Стрелочка */
+.back-link::before {
+    content: '←';
+    font-size: 1.2em;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+
+/* Эффект при наведении */
+.back-link:hover {
+    color: var(--clr-purple-darkest);
+}
+
+.back-link:hover::before {
+    transform: translateX(-4px); 
+}
+
+/* Фокус для доступности (клавиатура) */
+.back-link:focus-visible {
+    outline: 2px solid var(--clr-purple);
+    outline-offset: 4px;
+    border-radius: 4px;
 }
