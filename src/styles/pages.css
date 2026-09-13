@@ -2,6 +2,17 @@ section {
     width: 100%;
 }
 
+h2, 
+p {
+    text-align: center;
+}
+@media (min-width: 35em) {
+        h2,
+        p {
+            text-align: start;
+}
+}
+
 .images-carousel,
 .reviews-carousel {
     touch-action: pan-y;
