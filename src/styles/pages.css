@@ -209,21 +209,31 @@ section {
 /* ------------------- */
 /* Услуги              */
 /* ------------------- */
+/* ------------------- */
+/* Услуги              */
+/* ------------------- */
 .services {
     background-color: var(--clr-bg-alt);
     grid-area: services;
     border-radius: var(--border-radius);
-    padding: var(--gap-medium);
-    width: calc(100% - var(--gap-medium) * 2);
-    margin: var(--gap-medium);
+    padding: clamp(1.25rem, 6vw, 4rem); 
+    
+    margin-top: var(--gap-medium);
+    margin-bottom: var(--gap-medium);
+    margin-inline: auto;
+    
+    width: calc(100% - 2 * clamp(1rem, 6vw, 2rem));
+    box-sizing: border-box;
     box-shadow: var(--shadow);
 }
 
-/* По умолчанию – колонка (mobile) */
+/* По умолчанию - колонка (mobile) */
 .services-wrapper {
     flex-direction: column;
-    align-items: stretch;      
-    gap: var(--gap-medium);     
+    align-items: stretch;
+    
+    /* гибкий отступ между карточками */
+    gap: clamp(1rem, 4vw, var(--gap-medium));     
 }
 
 .services__card-link {
@@ -238,7 +248,7 @@ section {
     color: inherit;
 }
 
-/* Планшет (35em) – сетка 2×2 */
+/* Планшет (35em) -- сетка 2×2 */
 @media (min-width: 35em) {
     .services {
         margin-inline: -2em;

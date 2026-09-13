@@ -108,7 +108,7 @@ html {
 body {
     background-color: var(--clr-bg);
     color: var(--clr-purple-darkest);
-    font-size: 1.2em;
+    font-size: var(--fs-400);
     position: relative;
     font-family: "Montserrat", sans-serif;
     font-style: normal;
