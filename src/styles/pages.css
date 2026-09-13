@@ -961,53 +961,39 @@ body.price-page::before {
 .service-line p:last-child {
     grid-column: 3 / 4;
 }
-
-/* Контейнер для выравнивания ссылки */
 .breadcrumb {
     display: grid;
-    /* Используем ту же сетку, что и у .pricelist-title, для идеального выравнивания по левому краю контента */
     grid-template-columns: 1fr 80vw 1fr; 
-    margin-top: var(--gap-small); /* Небольшой отступ от заголовка */
-    margin-bottom: -1rem; /* Немного подтягиваем блок "Важно!" наверх */
+    margin-top: var(--gap-small);
+    margin-bottom: -1rem;
 }
 
-/* Сама ссылка */
 .back-link {
-    grid-column: 2 / 3; /* Встает ровно под текстом заголовка */
+    grid-column: 2 / 3; 
     display: inline-flex;
     align-items: center;
     gap: 0.5em;
-    
-    /* Цвета и шрифты из ваших переменных */
     color: var(--clr-purple-dark);
     text-decoration: none;
     font-size: var(--fs-400);
     font-weight: 500;
     font-family: inherit;
-    
-    /* Плавные переходы */
     transition: color 0.3s ease, transform 0.3s ease;
     width: fit-content;
 }
 
-/* Стрелочка */
 .back-link::before {
     content: '←';
     font-size: 1.2em;
     line-height: 1;
     transition: transform 0.3s ease;
 }
-
-/* Эффект при наведении */
 .back-link:hover {
     color: var(--clr-purple-darkest);
 }
-
 .back-link:hover::before {
     transform: translateX(-4px); 
 }
-
-/* Фокус для доступности (клавиатура) */
 .back-link:focus-visible {
     outline: 2px solid var(--clr-purple);
     outline-offset: 4px;
