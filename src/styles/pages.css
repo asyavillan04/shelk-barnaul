@@ -238,10 +238,6 @@ section {
     color: inherit;
 }
 
-.service-name {
-    font-size: var(--fs-300);
-}
-
 /* Планшет (35em) – сетка 2×2 */
 @media (min-width: 35em) {
     .services {
@@ -300,6 +296,7 @@ section {
     padding-inline: 1em;
     position: relative;
     z-index: 100;
+    font-size: var(--fs-300);
 }
 .services__card-image::after {
     content: '';
