@@ -2,17 +2,6 @@ section {
     width: 100%;
 }
 
-h2, 
-p {
-    text-align: center;
-}
-@media (min-width: 35em) {
-        h2,
-        p {
-            text-align: start;
-}
-}
-
 .images-carousel,
 .reviews-carousel {
     touch-action: pan-y;
@@ -220,9 +209,6 @@ p {
 /* ------------------- */
 /* Услуги              */
 /* ------------------- */
-/* ------------------- */
-/* Услуги              */
-/* ------------------- */
 .services {
     background-color: var(--clr-bg-alt);
     grid-area: services;
@@ -237,8 +223,16 @@ p {
     box-sizing: border-box;
     box-shadow: var(--shadow);
 }
+.services h2 {
+    text-align: center;
+}
+@media (min-width:35em) {
+    .services h2 {
+        text-align: start;
+}
+}
 
-/* По умолчанию - колонка (mobile) */
+/* По умолчанию -- колонка (mobile) */
 .services-wrapper {
     flex-direction: column;
     align-items: stretch;
@@ -313,6 +307,7 @@ p {
     background-color: var(--clr-bg);
     height: 3em;
     align-items: center;
+    text-align: center;
     justify-content: center;
     padding-inline: 1em;
     position: relative;
@@ -542,6 +537,7 @@ p {
     display: inline-block;
     transition: background 0.2s;
     white-space: nowrap;
+    font-size: var(--fs-300);
 }
 
 .contact-card-btn:hover {
@@ -791,21 +787,18 @@ body.price-page::before {
 }
 
 /* Блок предупреждений */
-/* Блок предупреждений */
 .warnings {
     background-color: var(--clr-bg-alt);
     border-radius: var(--border-radius);
     padding: var(--gap-medium);
     box-shadow: var(--shadow);
-    
-    /* Акцентная полоса слева для привлечения внимания */
+
     border-left: 4px solid var(--clr-purple-dark);
     
     display: flex;
     flex-direction: column;
     gap: var(--gap-small);
-    
-    /* Адаптивность: на мобильных занимает всю ширину, на десктопе ограничиваем */
+
     width: 100%;
     max-width: 400px; 
     box-sizing: border-box;
@@ -824,30 +817,26 @@ body.price-page::before {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
-    /* Размеры и отступы */
+
     width: 100%;
     padding: 0.8em 1.2em;
     box-sizing: border-box;
-    
-    /* Оформление */
+
     background-color: transparent;
     border: 1px solid var(--clr-purple);
     border-radius: calc(var(--border-radius) / 1.5);
     color: var(--clr-purple-dark);
-    
-    /* Типографика */
+
     font-size: var(--fs-400);
     font-weight: 500;
     font-family: inherit;
     text-align: left;
     cursor: pointer;
-    
-    /* Плавные переходы */
+
     transition: all 0.3s ease;
 }
 
-/* Стрелочка вниз (указывает на открытие модального окна) */
+/* Стрелочка */
 .warnings-link::after {
     content: '';
     display: inline-block;
@@ -861,19 +850,14 @@ body.price-page::before {
     margin-left: var(--gap-small);
 }
 
-/* Эффект при наведении */
 .warnings-link:hover {
     background-color: var(--clr-purple);
     color: var(--clr-bg-alt);
     border-color: var(--clr-purple);
 }
-
-/* Эффект при нажатии */
 .warnings-link:active {
     transform: scale(0.98);
 }
-
-/* Фокус для доступности (клавиатура) */
 .warnings-link:focus-visible {
     outline: 2px solid var(--clr-purple-darkest);
     outline-offset: 2px;
