@@ -803,7 +803,7 @@ section {
     gap: var(--gap-small);
     transition: transform 0.4s ease;
     will-change: transform;
-    align-items: flex-start;   /* ← вместо stretch, чтобы слайды не тянулись */
+    align-items: stretch;
 }
 
 .reviews-carousel > div {
@@ -818,17 +818,16 @@ section {
     box-shadow: var(--shadow);
 }
 
-/* ← Ключевой фикс: убрали прямой потомок > */
 .reviews-carousel > div picture {
     display: block;
     width: 100%;
+    margin: auto 0;
 }
 
 .reviews-carousel > div img {
     display: block;
     width: 100%;
-    height: auto;              /* ← важно, без него flex может растянуть по высоте */
-    align-self: center;
+    height: auto;
     border-radius: 10px;
     pointer-events: none;
 }
