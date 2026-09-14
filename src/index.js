@@ -148,7 +148,12 @@ const imageVariants = [
 const totalSlides = imageVariants.length;
 
 if (carouselTrack && totalSlides) {
-    carouselTrack.innerHTML = '';
+    // Если первый слайд уже в HTML -- не стираем его
+    const staticFirstSlide = carouselTrack.querySelector('picture[data-static="true"]');
+    
+    if (!staticFirstSlide) {
+        carouselTrack.innerHTML = '';
+    }
     indicatorsContainer.innerHTML = '';
 
     function createSlide(variant, realIndex) {
@@ -177,11 +182,18 @@ if (carouselTrack && totalSlides) {
         return picture;
     }
 
-    const lastClone = createSlide(imageVariants[totalSlides - 1], totalSlides - 1);
-    const firstClone = createSlide(imageVariants[0], 0);
-    carouselTrack.appendChild(lastClone);
-    imageVariants.forEach((variant, idx) => carouselTrack.appendChild(createSlide(variant, idx)));
-    carouselTrack.appendChild(firstClone);
+ // Клон последнего слайда -- вставляем ПЕРЕД статичным первым
+const lastClone = createSlide(imageVariants[totalSlides - 1], totalSlides - 1);
+carouselTrack.insertBefore(lastClone, carouselTrack.firstChild);
+// Реальные слайды: пропускаем индекс 0, если он статичный в HTML
+imageVariants.forEach((variant, idx) => {
+    if (staticFirstSlide && idx === 0) return;
+    carouselTrack.appendChild(createSlide(variant, idx));
+});
+
+// Клон первого слайда — в самый конец
+const firstClone = createSlide(imageVariants[0], 0);
+carouselTrack.appendChild(firstClone);
 
     for (let i = 0; i < totalSlides; i++) {
         const btn = document.createElement('button');
@@ -301,8 +313,7 @@ carouselTrack.addEventListener('click', (e) => {
         updateActiveClasses();
     }
 
-    window.addEventListener('load', initCarousel);
-    if (document.readyState === 'complete') initCarousel();
+    initCarousel();
 
     window.addEventListener('resize', () => {
         updateSizes();
@@ -343,15 +354,33 @@ if (reviewsTrack && totalReviews) {
     reviewsTrack.innerHTML = '';
     reviewsIndicatorsContainer.innerHTML = '';
 
-    function createReviewSlide(src, realIndex) {
-        const div = document.createElement('div');
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = '';
-        div.dataset.index = realIndex;
-        div.appendChild(img);
-        return div;
-    }
+function createReviewSlide(src, realIndex) {
+    const div = document.createElement('div');
+    const picture = document.createElement('picture');
+
+    // Формируем путь к WebP на основе JPG-пути
+    // 'assets/reviews/review-1.jpg' > 'assets/reviews/review-1.webp'
+    const webpSrc = src.replace(/\.jpe?g$/i, '.webp');
+
+    const source = document.createElement('source');
+    source.type = 'image/webp';
+    source.srcset = webpSrc;
+    picture.appendChild(source);
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = '';
+    img.width = 828;      // реальная ширина картинок отзывов
+    img.height = 1000;    // реальная высота (для CLS)
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    picture.appendChild(img);
+
+    div.dataset.index = realIndex;
+    div.appendChild(picture);
+    return div;
+}
+
 
     const lastClone = createReviewSlide(reviewImages[totalReviews - 1], totalReviews - 1);
     const firstClone = createReviewSlide(reviewImages[0], 0);
