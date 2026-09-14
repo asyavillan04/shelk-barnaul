@@ -223,26 +223,25 @@ section {
     box-sizing: border-box;
     box-shadow: var(--shadow);
 }
+
 .services h2 {
     text-align: center;
-}
-@media (min-width:35em) {
-    .services h2 {
-        text-align: start;
-}
+    margin-bottom: var(--gap-medium);
 }
 
-/* По умолчанию -- колонка (mobile) */
+/* ===== Сетка карточек (мобильные: 2 колонки) ===== */
 .services-wrapper {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    width: 100%;
     align-items: stretch;
-    
-    /* гибкий отступ между карточками */
-    gap: clamp(1rem, 4vw, var(--gap-medium));     
 }
 
+/* ===== Карточка услуги ===== */
 .services__card-link {
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 100%;  
     aspect-ratio: 4 / 5;
     border-radius: var(--border-radius);
@@ -253,42 +252,32 @@ section {
     color: inherit;
 }
 
-/* Планшет (35em) -- сетка 2×2 */
-@media (min-width: 35em) {
-    .services {
-        margin-inline: -2em;
-        width: calc(100% + 2em);
-    }
-    .services-wrapper {
-        flex-direction: row;
-        flex-wrap: wrap; 
-        justify-content: center;
-    }
-
-    .services__card-link {
-        width: calc(50% - 2em); 
-        max-width: 300px; 
-    }
+/* ===== Название услуги ===== */
+.service-name {
+    background-color: var(--clr-bg);
+    min-height: 3.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.5em 0.75em;
+    position: relative;
+    z-index: 100;
+    font-size: var(--fs-300);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-/* Десктоп (64em) */
-@media (min-width: 64em) {
-    .services-wrapper {
-        flex-wrap: nowrap; 
-        justify-content: space-evenly;
-        gap: var(--gap-small); 
-    }
-
-    .services__card-link {
-        min-width: 15vw;  
-        max-width: 7em;
-    }
-}
-
+/* ===== Изображение ===== */
 .services__card-image {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    position: relative;
 }
+
 .services__card-image > img {
     height: 100%;
     width: 100%;
@@ -297,23 +286,8 @@ section {
     z-index: 1;
     transition: transform 0.3s ease-in-out;
 }
-.services__card-link:hover .services__card-image img,
-.services__card-link:focus .services__card-image img,
-.services__card-link:hover .services__card-image img,
-.services__card-link:active .services__card-image img {
-    transform: scale(1.1);
-}
-.service-name {
-    background-color: var(--clr-bg);
-    height: 3em;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    padding-inline: 1em;
-    position: relative;
-    z-index: 100;
-    font-size: var(--fs-300);
-}
+
+/* Градиент поверх изображения */
 .services__card-image::after {
     content: '';
     position: absolute;
@@ -322,6 +296,49 @@ section {
     pointer-events: none;
     z-index: 1;
     top: 0;
+}
+
+/* Эффект зума при наведении */
+.services__card-link:hover .services__card-image img,
+.services__card-link:focus .services__card-image img,
+.services__card-link:active .services__card-image img {
+    transform: scale(1.1);
+}
+
+/* ===== Планшет ===== */
+@media (min-width: 35em) {
+    .services {
+        margin-inline: -2em;
+        width: calc(100% + 2em);
+    }
+
+    .services h2 {
+        text-align: start;
+    }
+    
+    .services-wrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        justify-items: center;
+    }
+
+    .services__card-link {
+        max-width: 320px; 
+    }
+}
+
+/* ===== Десктоп ===== */
+@media (min-width: 64em) {
+    .services-wrapper {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--gap-medium);
+        justify-items: center;
+    }
+
+    .services__card-link {
+        max-width: 240px;
+        aspect-ratio: 3 / 4;
+    }
 }
 
 /* ------------------- */
@@ -847,7 +864,6 @@ section {
 }
 /* ===== Раскладка блока "Важно!" и "Акции" ===== */
 
-/* Мобильная версия */
 .important-info-layout {
     display: grid;
     grid-template-columns: 1fr;
@@ -918,11 +934,13 @@ section {
         padding: var(--gap-medium);
         box-shadow: var(--shadow);
         border-left: 4px solid var(--clr-purple); 
-        margin: 0;
-        height: 100%;
         display: grid;
         grid-template-rows: auto 1fr !important; 
         flex-direction: column;
+        max-width: min(900px, 70vw);
+        margin-left: auto;
+        margin-right: 0;
+        height: 100%;
     }
     .promotions-zone .pricelist-heading {
         background: none;
@@ -950,11 +968,19 @@ section {
         min-height: auto; 
         flex-grow: 1; 
     }
+
     .promo-list {
         grid-template-columns: 1fr 1fr; 
         gap: 1.5rem 1rem; 
         align-items: start; 
     }
+    .promo-list--single {
+        grid-template-columns: 1fr;
+    }
+
+    .promo-list--single li {
+        align-items: center;
+}
 }
 
 /* -------------------------- */
@@ -1094,4 +1120,116 @@ section {
     outline: 2px solid var(--clr-purple);
     outline-offset: 4px;
     border-radius: 4px;
+}
+
+/* ----------------------------------- */
+/* Таблица цен для аппаратной коррекции*/
+/* ----------------------------------- */
+.price-table {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-block: var(--gap-medium);
+    width: 100%;
+}
+
+/* Заголовок таблицы (скрыт на мобильных) */
+.price-table__header {
+    display: none;
+}
+
+/* ===== Мобильная версия: каждая процедура -- карточка ===== */
+.price-table__row {
+    background-color: var(--clr-bg-alt);
+    border-radius: var(--border-radius);
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--clr-purple-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.price-table__name {
+    font-weight: 700;
+    color: var(--clr-purple-darkest);
+    font-size: var(--fs-500);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--clr-bg);
+}
+
+.price-table__cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    font-size: var(--fs-400);
+    color: var(--clr-text);
+    padding: 0.15rem 0;
+}
+
+.price-table__cell::before {
+    content: attr(data-label);
+    color: var(--clr-purple-dark);
+    font-weight: 500;
+}
+
+/* ===== Планшет и Десктоп (35em): таблица ===== */
+@media (min-width: 35em) {
+    .price-table {
+        gap: 0.75rem;
+    }
+
+    .price-table__header {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+        background-image: linear-gradient(to right, var(--clr-purple-dark), var(--clr-purple));
+        color: var(--clr-bg-alt);
+        font-weight: 600;
+        font-size: var(--fs-400);
+        text-align: center;
+        align-items: center;
+        box-shadow: var(--shadow);
+    }
+
+    .price-table__header > div:first-child {
+        text-align: left;
+    }
+
+    .price-table__row {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+        align-items: center;
+        border-left: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.2s ease;
+        border-radius: 0;
+    }
+
+    .price-table__row:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .price-table__name {
+        font-size: var(--fs-400);
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .price-table__cell {
+        display: block;
+        text-align: center;
+        padding: 0;
+        border: none;
+    }
+
+    .price-table__cell::before {
+        display: none; 
+    }
 }

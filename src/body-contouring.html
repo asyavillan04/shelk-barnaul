@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Лазерная эпиляция для женщин в студии «Шёлк» в Барнауле: безболезненно, эффективно, надолго. Цены на лазер. Запись онлайн.">
-    <title>Лазерная эпиляция (женщинам) | Студия "Шёлк"</title>
+    <meta name="description" content="Аппаратная коррекция фигуры в студии «Шёлк» в Барнауле: ультразвуковая кавитация, вакуумно-роликовый масссаж, RF-лифтинг, миостимуляция. Запись онлайн.">
+    <title>Аппаратная коррекция фигуры | Студия "Шёлк"</title>
 
 
     <link rel="stylesheet" href="./styles/index.css">
@@ -27,28 +27,16 @@
         </div>
     </header>
 
-    <main class="pricelist flow">
-        <div class="pricelist-title has-lavender">
-            <h2>Лазерная эпиляция (женщинам)</h2>
-        </div>
-        <div class="breadcrumb">
-            <a href="index.html" class="back-link">На главную</a>
-        </div>
-<div class="important-info-layout">
-    <!-- Блок "Важно!" -->
-    <div class="warnings">
-        <h3>Важно!</h3>
-        <button type="button" class="warnings-link" data-modal="modal-contraindications">
-            Противопоказания
-        </button>
-        <button type="button" class="warnings-link" data-modal="modal-preparation">
-            Подготовка к процедуре
-        </button>
+<main class="pricelist flow">
+    <div class="pricelist-title has-lavender">
+        <h2>Аппаратная коррекция фигуры</h2>
+    </div>
+    <div class="breadcrumb">
+        <a href="index.html" class="back-link">На главную</a>
     </div>
 
-    <!-- Блок "Акции" -->
+    <!-- Блок акций -->
     <div class="promotions-zone pricelist-zone" data-collapsed="true">
-        <!-- На мобильном это кнопка, на ПК это просто заголовок -->
         <button type="button" class="pricelist-heading" aria-expanded="false">
             <h3>Акции студии</h3>
             <span class="arrow" aria-hidden="true">
@@ -57,7 +45,6 @@
                 </svg>
             </span>
         </button>
-        
         <div class="pricelist-items">
             <ul class="promo-list">
                 <li>
@@ -79,142 +66,53 @@
             </ul>
         </div>
     </div>
-</div>
-        <!-- Лицо -->
-        <div class="pricelist-zone" data-collapsed="true">
-            <button type="button" class="pricelist-heading" aria-expanded="false">
-                <h3>Лицо</h3>
-                <span class="arrow" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="20" height="20">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor"
-                              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-            </button>
-            <div class="pricelist-items">
-                <div class="service-line"><p>Лицо полностью</p><p>1500р/6000р</p></div>
-                <div class="service-line"><p>Подбородок</p><p>500р/2000р</p></div>
-                <div class="service-line"><p>Верхняя губа</p><p>500р/2000р</p></div>
-                <div class="service-line"><p>Лоб</p><p>600р/2400р</p></div>
-                <div class="service-line"><p>Виски</p><p>500р/2000р</p></div>
-                <div class="service-line"><p>Щёки</p><p>600р/2400р</p></div>
-                <div class="service-line"><p>Шея</p><p>1000р/4000р</p></div>
-            </div>
+
+    <!-- Таблица цен -->
+    <div class="price-table">
+        <!-- Заголовок (виден только на десктопе) -->
+        <div class="price-table__header">
+            <div>Процедура</div>
+            <div>Разовое</div>
+            <div>Абонемент 3</div>
+            <div>Абонемент 5</div>
+            <div>Абонемент 10</div>
         </div>
 
-        <!-- Тело -->
-        <div class="pricelist-zone" data-collapsed="true">
-            <button type="button" class="pricelist-heading" aria-expanded="false">
-                <h3>Тело</h3>
-                <span class="arrow" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="20" height="20">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor"
-                              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-            </button>
-            <div class="pricelist-items">
-                <div class="service-line"><p>Грудь</p><p>1500р/6000р</p></div>
-                <div class="service-line"><p>Декольте</p><p>500р/2000р</p></div>
-                <div class="service-line"><p>Ареолы</p><p>500р/2000р</p></div>
-                <div class="service-line"><p>Плечи</p><p>600р/2400р</p></div>
-                <div class="service-line"><p>Спина</p><p>500р/2000р</p></div>
-                <div class="service-line"><p>Поясница</p><p>600р/2400р</p></div>
-                <div class="service-line"><p>Дорожка на животе</p><p>1000р/4000р</p></div>
-                <div class="service-line"><p>Живот полностью</p><p>1000р/4000р</p></div>
-            </div>
+        <!-- Строки: -->
+        <div class="price-table__row">
+            <div class="price-table__name">Ультразвуковая кавитация</div>
+            <div class="price-table__cell" data-label="Разовое">1500 ₽</div>
+            <div class="price-table__cell" data-label="Абонемент 3">3300 ₽</div>
+            <div class="price-table__cell" data-label="Абонемент 5">5000 ₽</div>
+            <div class="price-table__cell" data-label="Абонемент 10">9000 ₽</div>
         </div>
 
-        <!-- Бикини -->
-        <div class="pricelist-zone" data-collapsed="true">
-            <button type="button" class="pricelist-heading" aria-expanded="false">
-                <h3>Бикини</h3>
-                <span class="arrow" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="20" height="20">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor"
-                              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-            </button>
-            <div class="pricelist-items">
-                <div class="service-line"><p>Классика</p><p>1500р/6000р</p></div>
-                <div class="service-line"><p>Глубокое</p><p>500р/2000р</p></div>
-                <div class="service-line"><p>Тотальное</p><p>500р/2000р</p></div>
-            </div>
+        <div class="price-table__row">
+            <div class="price-table__name">Вакуумно-роликовый масссаж с RF-лифтингом</div>
+            <div class="price-table__cell" data-label="Разовое">1500 ₽</div>
+            <div class="price-table__cell" data-label="Абонемент 3">3300 ₽</div>
+            <div class="price-table__cell" data-label="Абонемент 5">5000 ₽</div>
+            <div class="price-table__cell" data-label="Абонемент 10">9000 ₽</div>
         </div>
 
-        <!-- Ноги -->
-        <div class="pricelist-zone" data-collapsed="true">
-            <button type="button" class="pricelist-heading" aria-expanded="false">
-                <h3>Ноги</h3>
-                <span class="arrow" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="20" height="20">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor"
-                              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-            </button>
-            <div class="pricelist-items">
-                <div class="service-line"><p>Ягодицы</p><p>1500р/6000р</p></div>
-                <div class="service-line"><p>Межъягодичная зона</p><p>500р/2000р</p></div>
-                <div class="service-line"><p>Бёдра</p><p>500р/2000р</p></div>
-                <div class="service-line"><p>Голени</p><p>600р/2400р</p></div>
-                <div class="service-line"><p>Ноги полностью</p><p>500р/2000р</p></div>
-            </div>
+        <div class="price-table__row">
+            <div class="price-table__name">RF-лифтинг</div>
+            <div class="price-table__cell" data-label="Разовое">1300 ₽</div>
+            <div class="price-table__cell" data-label="Абонемент 3">2700 ₽</div>
+            <div class="price-table__cell" data-label="Абонемент 5">4000 ₽</div>
+            <div class="price-table__cell" data-label="Абонемент 10">7000 ₽</div>
         </div>
 
-        <!-- Руки -->
-        <div class="pricelist-zone" data-collapsed="true">
-            <button type="button" class="pricelist-heading" aria-expanded="false">
-                <h3>Руки</h3>
-                <span class="arrow" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="20" height="20">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor"
-                              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-            </button>
-            <div class="pricelist-items">
-                <div class="service-line"><p>До локтя</p><p>1500р/6000р</p></div>
-                <div class="service-line"><p>Выше локтя</p><p>500р/2000р</p></div>
-                <div class="service-line"><p>Полностью</p><p>500р/2000р</p></div>
-                <div class="service-line"><p>Подмышечные впадины</p><p>600р/2400р</p></div>
-                <div class="service-line"><p>Кисти рук/стопы</p><p>500р/2000р</p></div>
-                <div class="service-line"><p>Пальцы рук/ног</p><p>600р/2400р</p></div>
-            </div>
+        <div class="price-table__row">
+            <div class="price-table__name">Миостимуляция</div>
+            <div class="price-table__cell" data-label="Разовое">1000 ₽</div>
+            <div class="price-table__cell" data-label="Абонемент 3">2100 ₽</div>
+            <div class="price-table__cell" data-label="Абонемент 5">3000 ₽</div>
+            <div class="price-table__cell" data-label="Абонемент 10">5000 ₽</div>
         </div>
-    </main>
 
-    <div class="modal" id="modal-contraindications" role="dialog" aria-modal="true" aria-labelledby="modal-contraindications-title">
-    <div class="modal-content">
-        <button type="button" class="modal-close" aria-label="Закрыть">×</button>
-        <h3 id="modal-contraindications-title" class="uppercase">Противопоказания</h3>
-        <p>- Кожные заболевания в острой или хронической форме (псориаз, экзема и др.)</p>
-        <p>- Порезы, ранки и другие нарушения целостности кожного покрова</p>
-        <p>- Сахарный диабет</p>
-        <p>- Герпес в стадии обострения</p>
-        <p>- Онкологические заболевания</p>
-        <p>- Варикозное расширение вен на месте обработки лазером</p>
-        <p>- Наличие выпуклых родинок и татуировок на обрабатываемом участке</p>
-        <p>- Простудные вирусные инфекции (грипп, ОРВИ и т.д.)</p>
-        <p>- Аллергия в обострённом виде и с реакцией на кожном покрове</p>
-        <p>- Свежий загар, естественный или приобретённый в солярии</p>
-        <p>- Беременность</p>
-        <p>- Приём антибиотиков и некоторых гормональных препаратов</p>
     </div>
-</div>
-
-<div class="modal" id="modal-preparation" role="dialog" aria-modal="true" aria-labelledby="modal-preparation-title">
-    <div class="modal-content">
-        <button type="button" class="modal-close" aria-label="Закрыть">×</button>
-        <h3 id="modal-preparation-title" class="uppercase">Подготовка к эпиляции:</h3>
-        <p>✔нельзя загорать 2-3 дня до процедуры, исключить бани, сауны, горячие ванны. </p>
-        <p>✔нельзя выдергивать волосы за 2 недели до процедуры: воск, шугаринг, пинцет, эпилятор.</p>
-        <p>✔нельзя наносить на  кожу масло и спиртосодержащие средства в день процедуры и пользоваться дезодорантом</p>
-        <p>✔за 1 день (минимум 4 часа) до процедуры зону эпиляции следует тщательно выбрить или использовать крем для депиляции. На лице не брить, триммер или крем. Если нет, то на месте триммером уберём.</p>
-        <p>✔за неделю до процедуры нужно прекратить приём Антибиотиков.</p>
-    </div>
-</div>
+</main>
 
 </body>
 </html>
