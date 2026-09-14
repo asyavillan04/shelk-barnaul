@@ -124,24 +124,52 @@ const indicatorsContainer = document.querySelector('.dot-indicators');
 
 const imageVariants = [
     {
-        avif: { small: './assets/home-images/home-1-small.avif', large: './assets/home-images/home-1-large.avif' },
-        webp: { small: './assets/home-images/home-1-small.webp', large: './assets/home-images/home-1-large.webp' },
-        jpeg: { small: './assets/home-images/home-1-small.jpeg', large: './assets/home-images/home-1-large.jpeg' }
+        webp: { 
+            small: './assets/home-images/home-1-small.webp', 
+            medium: './assets/home-images/home-1-medium.webp', 
+            large: './assets/home-images/home-1-large.webp' 
+        },
+        jpeg: { 
+            small: './assets/home-images/home-1-small.jpeg', 
+            medium: './assets/home-images/home-1-medium.jpeg', 
+            large: './assets/home-images/home-1-large.jpeg' 
+        }
     },
     {
-        avif: { small: './assets/home-images/home-2-small.avif', large: './assets/home-images/home-2-large.avif' },
-        webp: { small: './assets/home-images/home-2-small.webp', large: './assets/home-images/home-2-large.webp' },
-        jpeg: { small: './assets/home-images/home-2-small.jpeg', large: './assets/home-images/home-2-large.jpeg' }
+        webp: { 
+            small: './assets/home-images/home-2-small.webp', 
+            medium: './assets/home-images/home-2-medium.webp', 
+            large: './assets/home-images/home-2-large.webp' 
+        },
+        jpeg: { 
+            small: './assets/home-images/home-2-small.jpeg', 
+            medium: './assets/home-images/home-2-medium.jpeg', 
+            large: './assets/home-images/home-2-large.jpeg' 
+        }
     },
     {
-        avif: { small: './assets/home-images/home-3-small.avif', large: './assets/home-images/home-3-large.avif' },
-        webp: { small: './assets/home-images/home-3-small.webp', large: './assets/home-images/home-3-large.webp' },
-        jpeg: { small: './assets/home-images/home-3-small.jpg', large: './assets/home-images/home-3-large.jpg' }
+        webp: { 
+            small: './assets/home-images/home-3-small.webp', 
+            medium: './assets/home-images/home-3-medium.webp', 
+            large: './assets/home-images/home-3-large.webp' 
+        },
+        jpeg: { 
+            small: './assets/home-images/home-3-small.jpg', 
+            medium: './assets/home-images/home-3-medium.jpg', 
+            large: './assets/home-images/home-3-large.jpg' 
+        }
     },
     {
-        avif: { small: './assets/home-images/home-4-small.avif', large: './assets/home-images/home-4-large.avif' },
-        webp: { small: './assets/home-images/home-4-small.webp', large: './assets/home-images/home-4-large.webp' },
-        jpeg: { small: './assets/home-images/home-4-small.jpg', large: './assets/home-images/home-4-large.jpg' }
+        webp: { 
+            small: './assets/home-images/home-4-small.webp', 
+            medium: './assets/home-images/home-4-medium.webp', 
+            large: './assets/home-images/home-4-large.webp' 
+        },
+        jpeg: { 
+            small: './assets/home-images/home-4-small.jpg', 
+            medium: './assets/home-images/home-4-medium.jpg', 
+            large: './assets/home-images/home-4-large.jpg' 
+        }
     }
 ];
 
@@ -156,31 +184,34 @@ if (carouselTrack && totalSlides) {
     }
     indicatorsContainer.innerHTML = '';
 
-    function createSlide(variant, realIndex) {
-        const picture = document.createElement('picture');
-        picture.dataset.index = realIndex;
+function createSlide(variant, realIndex, isClone = false) {
+    const picture = document.createElement('picture');
+    picture.dataset.index = realIndex;
 
-        const sourceAvif = document.createElement('source');
-        sourceAvif.type = 'image/avif';
-        sourceAvif.srcset = `${variant.avif.small} 480w, ${variant.avif.large} 1200w`;
-        sourceAvif.sizes = '(max-width: 600px) 480px, 1200px';
-        picture.appendChild(sourceAvif);
+    const sourceWebp = document.createElement('source');
+    sourceWebp.type = 'image/webp';
+    sourceWebp.srcset = `${variant.webp.small} 480w, ${variant.webp.medium} 800w, ${variant.webp.large} 1200w`;
+    sourceWebp.sizes = '(max-width: 45em) 90vw, 60vw';
+    picture.appendChild(sourceWebp);
 
-        const sourceWebp = document.createElement('source');
-        sourceWebp.type = 'image/webp';
-        sourceWebp.srcset = `${variant.webp.small} 480w, ${variant.webp.large} 1200w`;
-        sourceWebp.sizes = '(max-width: 600px) 480px, 1200px';
-        picture.appendChild(sourceWebp);
+    const img = document.createElement('img');
+    img.src = variant.jpeg.large;
+    img.srcset = `${variant.jpeg.small} 480w, ${variant.jpeg.medium} 800w, ${variant.jpeg.large} 1200w`;
+    img.sizes = '(max-width: 45em) 90vw, 60vw';
+    img.alt = '';
+    img.width = 1200;
+    img.height = 750;
+    img.decoding = 'async';
 
-        const img = document.createElement('img');
-        img.src = variant.jpeg.large;
-        img.srcset = `${variant.jpeg.small} 480w, ${variant.jpeg.large} 1200w`;
-        img.sizes = '(max-width: 600px) 480px, 1200px';
-        img.alt = '';
-        picture.appendChild(img);
-
-        return picture;
+    if (!isClone && realIndex === 0) {
+        img.fetchPriority = 'high';
+    } else {
+        img.loading = 'lazy';
     }
+
+    picture.appendChild(img);
+    return picture;
+}
 
  // Клон последнего слайда -- вставляем ПЕРЕД статичным первым
 const lastClone = createSlide(imageVariants[totalSlides - 1], totalSlides - 1);
@@ -358,8 +389,6 @@ function createReviewSlide(src, realIndex) {
     const div = document.createElement('div');
     const picture = document.createElement('picture');
 
-    // Формируем путь к WebP на основе JPG-пути
-    // 'assets/reviews/review-1.jpg' > 'assets/reviews/review-1.webp'
     const webpSrc = src.replace(/\.jpe?g$/i, '.webp');
 
     const source = document.createElement('source');
@@ -370,8 +399,8 @@ function createReviewSlide(src, realIndex) {
     const img = document.createElement('img');
     img.src = src;
     img.alt = '';
-    img.width = 828;      // реальная ширина картинок отзывов
-    img.height = 1000;    // реальная высота (для CLS)
+    img.width = 828;
+    img.height = 1000;
     img.loading = 'lazy';
     img.decoding = 'async';
     picture.appendChild(img);

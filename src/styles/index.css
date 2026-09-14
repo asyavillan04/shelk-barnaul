@@ -602,7 +602,7 @@ section {
     left: 0;
     width: 100%;
     aspect-ratio: 75 / 52;
-    background-image: url('../assets/decorations/lavender-header-mobile.png');
+    background-image: url('../assets/decorations/lavender-header-mobile.webp');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: bottom left;
