@@ -634,6 +634,65 @@ section {
     grid-area: about;
 }
 
+.address-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.address-link {
+    color: var(--clr-purple-dark);
+    text-decoration: none;
+    border-bottom: 1px dashed currentColor;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.address-link:hover {
+    color: var(--clr-purple-darkest);
+    border-bottom-color: var(--clr-purple-darkest);
+}
+
+.address-link:focus-visible {
+    outline: 2px solid var(--clr-purple);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+.address-menu {
+    position: absolute;
+    top: calc(100% + 0.4em);
+    left: 0;
+    background-color: var(--clr-bg-alt);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 0.5em 0;
+    min-width: 12em;
+    z-index: 100;
+}
+
+.address-menu[hidden] {
+    display: none;
+}
+
+.address-menu a {
+    display: block;
+    padding: 0.6em 1em;
+    color: var(--clr-purple-darkest);
+    text-decoration: none;
+    font-size: var(--fs-400);
+    transition: background-color 0.2s ease;
+}
+
+.address-menu a:hover {
+    background-color: var(--clr-bg);
+}
+
 /* ------------------- */
 /* Услуги              */
 /* ------------------- */
@@ -690,7 +749,7 @@ section {
     text-align: center;
     padding: 0.5em 0.75em;
     position: relative;
-    z-index: 100;
+    z-index: 90;
     font-size: var(--fs-300);
     font-weight: 600;
     line-height: 1.2;

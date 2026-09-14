@@ -590,3 +590,32 @@ document.querySelectorAll('.pricelist-zone').forEach(zone => {
         heading.setAttribute('aria-expanded', isCollapsed ? 'true' : 'false');
     });
 });
+
+// =============================================
+// Адрес
+// =============================================
+document.querySelectorAll('.address-link--button').forEach(btn => {
+    const menu = btn.nextElementSibling;
+    if (!menu) return;
+
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = !menu.hidden;
+        menu.hidden = isOpen;
+        btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && e.target !== btn) {
+            menu.hidden = true;
+            btn.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            menu.hidden = true;
+            btn.setAttribute('aria-expanded', 'false');
+        }
+    });
+});
