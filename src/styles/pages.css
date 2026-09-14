@@ -755,23 +755,6 @@ section {
     padding-top: 2rem;
 }
 
-/* фон */
-body.price-page::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 120%;
-    z-index: -1;
-    background-image: url('../assets/decorations/lavender-watercolor.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.1;
-    will-change: transform;
-}
-
 /* Главный заголовок страницы */
 .pricelist-title {
     display: grid;
@@ -861,6 +844,117 @@ body.price-page::before {
 .warnings-link:focus-visible {
     outline: 2px solid var(--clr-purple-darkest);
     outline-offset: 2px;
+}
+/* ===== Раскладка блока "Важно!" и "Акции" ===== */
+
+/* Мобильная версия */
+.important-info-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-medium);
+    margin-block: var(--gap-medium);
+    width: 100%;
+}
+
+/* Стили для иконок */
+.promo-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.promo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.promo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+}
+
+.promo-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: var(--fs-400);
+    line-height: 1.3;
+}
+
+.promo-list strong {
+    color: var(--clr-purple-darkest);
+}
+
+@media (min-width: 64em) {
+    .important-info-layout {
+        grid-template-columns: minmax(280px, 1fr) 2fr; 
+        align-items: stretch; 
+        gap: var(--gap-medium);
+        width: 95%; 
+        max-width: 1400px; 
+        margin-inline: auto; 
+    }
+
+    .warnings {
+        margin: 0;
+        height: 100%; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+    }
+    .warnings h3 {
+        margin-bottom: var(--gap-medium); 
+    }
+    .promotions-zone,
+    .promotions-zone[data-collapsed="true"] {
+        background-color: var(--clr-bg-alt);
+        border-radius: var(--border-radius);
+        padding: var(--gap-medium);
+        box-shadow: var(--shadow);
+        border-left: 4px solid var(--clr-purple); 
+        margin: 0;
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto 1fr !important; 
+        flex-direction: column;
+    }
+    .promotions-zone .pricelist-heading {
+        background: none;
+        color: var(--clr-purple-darkest);
+        padding: 0 0 var(--gap-medium) 0;
+        cursor: default;
+        pointer-events: none;
+        text-align: left;
+        justify-content: flex-start;
+        display: block; 
+    }
+    
+    .promotions-zone .pricelist-heading h3 {
+        font-size: var(--fs-600);
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .promotions-zone .pricelist-heading .arrow {
+        display: none;
+    }
+
+    .promotions-zone .pricelist-items {
+        padding-top: 0;
+        min-height: auto; 
+        flex-grow: 1; 
+    }
+    .promo-list {
+        grid-template-columns: 1fr 1fr; 
+        gap: 1.5rem 1rem; 
+        align-items: start; 
+    }
 }
 
 /* -------------------------- */

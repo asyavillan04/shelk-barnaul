@@ -34,16 +34,52 @@
         <div class="breadcrumb">
             <a href="index.html" class="back-link">На главную</a>
         </div>
-        <div class="warnings">
-            <h3>Важно!</h3>
-            <button type="button" class="warnings-link" data-modal="modal-contraindications">
-                Противопоказания
-            </button>
-            <button type="button" class="warnings-link" data-modal="modal-preparation">
-                Подготовка к процедуре
-            </button>
-        </div>
+<div class="important-info-layout">
+    <!-- Блок "Важно!" -->
+    <div class="warnings">
+        <h3>Важно!</h3>
+        <button type="button" class="warnings-link" data-modal="modal-contraindications">
+            Противопоказания
+        </button>
+        <button type="button" class="warnings-link" data-modal="modal-preparation">
+            Подготовка к процедуре
+        </button>
+    </div>
 
+    <!-- Блок "Акции" -->
+    <div class="promotions-zone pricelist-zone" data-collapsed="true">
+        <!-- На мобильном это кнопка, на ПК это просто заголовок -->
+        <button type="button" class="pricelist-heading" aria-expanded="false">
+            <h3>Акции студии</h3>
+            <span class="arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        
+        <div class="pricelist-items">
+            <ul class="promo-list">
+                <li>
+                    <span class="promo-icon"><img src="./assets/icons/icon-gift.svg" alt=""></span>
+                    <div><strong>Скидка 50%</strong> на первое посещение</div>
+                </li>
+                <li>
+                    <span class="promo-icon"><img src="./assets/icons/icon-cake.svg" alt=""></span>
+                    <div><strong>Скидка 10%</strong> неделю ДО и ПОСЛЕ дня рождения</div>
+                </li>
+                <li>
+                    <span class="promo-icon"><img src="./assets/icons/icon-calendar.svg" alt=""></span>
+                    <div><strong>Абонемент</strong> 6 посещений по стоимости 4-х</div>
+                </li>
+                <li>
+                    <span class="promo-icon"><img src="./assets/icons/icon-friend.svg" alt=""></span>
+                    <div><strong>Приведи друга</strong> и получи 50% от его чека на бонусный счёт</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
         <!-- Лицо -->
         <div class="pricelist-zone" data-collapsed="true">
             <button type="button" class="pricelist-heading" aria-expanded="false">

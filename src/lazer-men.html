@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Лазерная эпиляция для женщин в студии «Шёлк» в Барнауле: безболезненно, эффективно, надолго. Цены на лазер. Запись онлайн.">
-    <title>Лазерная эпиляция (женщинам) | Студия "Шёлк"</title>
+    <title>Лазерная эпиляция (мужчинам) | Студия "Шёлк"</title>
 
 
     <link rel="stylesheet" href="./styles/index.css">
@@ -16,10 +16,12 @@
 </head>
 <body class="flow lazer-page price-page">
     <header class="flex main-header">
-        <div class="flex"></div>
+        <div class="flex">
+
+        </div>
 
         <div class="flow flow--space-small">
-            <h1 class="uppercase">Студия эстетики тела</h1>
+            <h1 class="uppercase fs-900">Студия эстетики тела</h1>
             <img src="./assets/logo.svg" alt="Логотип студии Шёлк">
             <p class="lowercase">Всё будет гладко</p>
         </div>
@@ -27,8 +29,13 @@
 
     <main class="pricelist flow">
         <div class="pricelist-title has-lavender">
-            <h2>Лазерная эпиляция (женщинам)</h2>
+            <h2>Лазерная эпиляция (мужчинам)</h2>
         </div>
+        <div class="breadcrumb">
+            <a href="index.html" class="back-link">На главную</a>
+        </div>
+<div class="important-info-layout">
+    <!-- Блок "Важно!" -->
     <div class="warnings">
         <h3>Важно!</h3>
         <button type="button" class="warnings-link" data-modal="modal-contraindications">
@@ -39,6 +46,40 @@
         </button>
     </div>
 
+    <!-- Блок "Акции" -->
+    <div class="promotions-zone pricelist-zone" data-collapsed="true">
+        <!-- На мобильном это кнопка, на ПК это просто заголовок -->
+        <button type="button" class="pricelist-heading" aria-expanded="false">
+            <h3>Акции студии</h3>
+            <span class="arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </button>
+        
+        <div class="pricelist-items">
+            <ul class="promo-list">
+                <li>
+                    <span class="promo-icon"><img src="./assets/icons/icon-gift.svg" alt=""></span>
+                    <div><strong>Скидка 50%</strong> на первое посещение</div>
+                </li>
+                <li>
+                    <span class="promo-icon"><img src="./assets/icons/icon-cake.svg" alt=""></span>
+                    <div><strong>Скидка 10%</strong> неделю ДО и ПОСЛЕ дня рождения</div>
+                </li>
+                <li>
+                    <span class="promo-icon"><img src="./assets/icons/icon-calendar.svg" alt=""></span>
+                    <div><strong>Абонемент</strong> 6 посещений по стоимости 4-х</div>
+                </li>
+                <li>
+                    <span class="promo-icon"><img src="./assets/icons/icon-friend.svg" alt=""></span>
+                    <div><strong>Приведи друга</strong> и получи 50% от его чека на бонусный счёт</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
         <!-- Лицо -->
         <div class="pricelist-zone" data-collapsed="true">
             <button type="button" class="pricelist-heading" aria-expanded="false">
