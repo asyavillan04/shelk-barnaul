@@ -26,7 +26,6 @@
             <p class="lowercase">Всё будет гладко</p>
         </div>
     </header>
-
 <main class="pricelist flow">
     <div class="pricelist-title has-lavender">
         <h2>Косметология</h2>
@@ -35,9 +34,9 @@
         <a href="index.html" class="back-link">На главную</a>
     </div>
 
-    <!-- Только акция -->
-    <div class="promotions-zone pricelist-zone" data-collapsed="true">
-        <button type="button" class="pricelist-heading" aria-expanded="false">
+    <!-- Акция раскрыта по умолчанию (без data-collapsed) -->
+    <div class="promotions-zone promotions-zone--expanded pricelist-zone">
+        <button type="button" class="pricelist-heading" aria-expanded="true">
             <h3>Акция студии</h3>
             <span class="arrow" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="20" height="20">
@@ -49,15 +48,61 @@
             <ul class="promo-list promo-list--single">
                 <li>
                     <span class="promo-icon"><img src="./assets/icons/icon-gift.svg" alt=""></span>
-                    <div>Абонемент на 10 посещений - <strong>скидка 10%</strong></div>
+                    <div>Абонемент на 10 посещений — <strong>скидка 10%</strong></div>
                 </li>
             </ul>
         </div>
     </div>
 
-    <!-- Таблица цен -->
-    <div class="price-table">
-        <!-- ... -->
+    <!-- Таблица цен: 3 колонки -->
+    <div class="price-table price-table--3col">
+        <div class="price-table__header">
+            <div>Процедура</div>
+            <div>Время</div>
+            <div>Цена</div>
+        </div>
+
+        <div class="price-table__row">
+            <div class="price-table__name">Ультразвуковая чистка лица</div>
+            <div class="price-table__cell" data-label="Время">30 мин</div>
+            <div class="price-table__cell" data-label="Цена">1700₽</div>
+        </div>
+
+        <div class="price-table__row">
+            <div class="price-table__name">Альгинатная маска</div>
+            <div class="price-table__cell" data-label="Время">20 мин</div>
+            <div class="price-table__cell" data-label="Цена">500 ₽</div>
+        </div>
+
+        <div class="price-table__row">
+            <div class="price-table__name">Карбокситерапия</div>
+            <div class="price-table__cell" data-label="Время">30 мин</div>
+            <div class="price-table__cell" data-label="Цена">1400 ₽</div>
+        </div>
+
+        <div class="price-table__row">
+            <div class="price-table__name">Фонофорез (лицо/шея/декольте)</div>
+            <div class="price-table__cell" data-label="Время">1 зона 20 мин</div>
+            <div class="price-table__cell" data-label="Цена">600 ₽</div>
+        </div>
+
+        <div class="price-table__row">
+            <div class="price-table__name">Фарфоровая куколка</div>
+            <div class="price-table__cell" data-label="Время">50 мин</div>
+            <div class="price-table__cell" data-label="Цена">2200 ₽</div>
+        </div>
+
+                <div class="price-table__row">
+            <div class="price-table__name">RF-лифтинг (лицо/шея/декольте)</div>
+            <div class="price-table__cell" data-label="Время">1 зона 15 мин</div>
+            <div class="price-table__cell" data-label="Цена">500 ₽</div>
+        </div>
+
+        <div class="price-table__row">
+            <div class="price-table__name">Микротоки</div>
+            <div class="price-table__cell" data-label="Время">1 зона 30 мин</div>
+            <div class="price-table__cell" data-label="Цена">1000 ₽</div>
+        </div>
     </div>
 </main>
 
