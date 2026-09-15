@@ -98,7 +98,7 @@ if (form) {
         submitBtn.textContent = 'Отправляем...';
 
         try {
-            const response = await fetch('https://formspree.io/f/moeqynnl', {
+            const response = await fetch('https://formspree.io/f/maeyrvdz', {
                 method: 'POST',
                 body: formData,
                 headers: { 'Accept': 'application/json' }
@@ -203,7 +203,6 @@ const imageVariants = [
 const totalSlides = imageVariants.length;
 
 if (carouselTrack && totalSlides) {
-    // Если первый слайд уже в HTML -- не стираем его
     const staticFirstSlide = carouselTrack.querySelector('picture[data-static="true"]');
     
     if (!staticFirstSlide) {
@@ -248,16 +247,13 @@ function createSlide(variant, realIndex, isClone = false) {
     return picture;
 }
 
- // Клон последнего слайда -- вставляем ПЕРЕД статичным первым
 const lastClone = createSlide(imageVariants[totalSlides - 1], totalSlides - 1);
 carouselTrack.insertBefore(lastClone, carouselTrack.firstChild);
-// Реальные слайды: пропускаем индекс 0, если он статичный в HTML
 imageVariants.forEach((variant, idx) => {
     if (staticFirstSlide && idx === 0) return;
     carouselTrack.appendChild(createSlide(variant, idx));
 });
 
-// Клон первого слайда -- в самый конец
 const firstClone = createSlide(imageVariants[0], 0);
 carouselTrack.appendChild(firstClone);
 
@@ -355,7 +351,6 @@ carouselTrack.addEventListener('click', (e) => {
     const currentReal = (currentIndex - 1 + totalSlides) % totalSlides;
     if (clickedRealIndex === currentReal) return;
 
-    // Считаем кратчайшее направление с учётом зацикливания
     let diff = clickedRealIndex - currentReal;
     if (diff >  totalSlides / 2) diff -= totalSlides;
     if (diff < -totalSlides / 2) diff += totalSlides;
@@ -363,7 +358,6 @@ carouselTrack.addEventListener('click', (e) => {
     goToSlide(currentIndex + diff);
 });
 
-    // Swipe для карусели изображений
     addSwipe(
         carouselViewport,
         () => goToSlide(currentIndex + 1),
@@ -536,7 +530,6 @@ function createReviewSlide(src, realIndex) {
 
         goToSlide(currentIndex + diff);
     });
-    // Swipe для карусели отзывов
     addSwipe(
         reviewsViewport,
         () => goToSlide(currentIndex + 1),
