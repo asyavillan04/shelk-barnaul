@@ -1042,7 +1042,7 @@ section {
     display: inline-block;
     transition: background 0.2s;
     white-space: nowrap;
-    font-size: var(--fs-300);
+    font-size: var(--fs-400);
 }
 
 .contact-card-btn:hover {
