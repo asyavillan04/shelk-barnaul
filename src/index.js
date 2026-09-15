@@ -49,6 +49,7 @@ function addSwipe(element, onLeft, onRight) {
 // Контактная форма
 // =============================================
 const form = document.getElementById('contact-form');
+const nameInput = document.getElementById('name');
 const phone = document.getElementById('phone');
 const consent = document.getElementById('consent');
 const feedback = document.getElementById('form-feedback');
@@ -57,13 +58,29 @@ if (form) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.error-message').forEach(el => {
+            el.style.display = 'none';
+            el.textContent = '';
+        });
+        feedback.textContent = '';
         let isValid = true;
 
-        if (!phone.value.trim()) {
-            document.getElementById('phone-error').textContent = 'Заполните номер телефона';
-            document.getElementById('phone-error').style.display = 'block';
+        if (!nameInput.value.trim()) {
+            document.getElementById('name-error').textContent = 'Укажите ваше имя';
+            document.getElementById('name-error').style.display = 'block';
+            nameInput.setAttribute('aria-invalid', 'true');
             isValid = false;
+        } else {
+            nameInput.removeAttribute('aria-invalid');
+        }
+
+        if (!phone.value.trim() || phone.value.replace(/\D/g, '').length < 11) {
+            document.getElementById('phone-error').textContent = 'Введите номер полностью';
+            document.getElementById('phone-error').style.display = 'block';
+            phone.setAttribute('aria-invalid', 'true');
+            isValid = false;
+        } else {
+            phone.removeAttribute('aria-invalid');
         }
 
         if (!consent.checked) {
@@ -75,8 +92,13 @@ if (form) {
         if (!isValid) return;
 
         const formData = new FormData(form);
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправляем...';
+
         try {
-            const response = await fetch('https://formspree.io/f/FORM_ID', {
+            const response = await fetch('https://formspree.io/f/moeqynnl', {
                 method: 'POST',
                 body: formData,
                 headers: { 'Accept': 'application/json' }
@@ -87,11 +109,16 @@ if (form) {
                 feedback.textContent = 'Спасибо! Ваше сообщение отправлено.';
                 feedback.style.color = 'green';
             } else {
-                throw new Error('Ошибка сервера');
+                const data = await response.json().catch(() => ({}));
+                const msg = data?.errors?.[0]?.message || 'Ошибка сервера';
+                throw new Error(msg);
             }
         } catch (error) {
             feedback.textContent = 'Произошла ошибка. Попробуйте позже.';
             feedback.style.color = 'red';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
         }
     });
 }
