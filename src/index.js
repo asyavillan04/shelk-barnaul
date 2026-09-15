@@ -188,11 +188,19 @@ function createSlide(variant, realIndex, isClone = false) {
     const picture = document.createElement('picture');
     picture.dataset.index = realIndex;
 
-    const sourceWebp = document.createElement('source');
-    sourceWebp.type = 'image/webp';
-    sourceWebp.srcset = `${variant.webp.small} 480w, ${variant.webp.medium} 800w, ${variant.webp.large} 1200w`;
-    sourceWebp.sizes = '(max-width: 45em) 90vw, 60vw';
-    picture.appendChild(sourceWebp);
+    const sourceWebpMobile = document.createElement('source');
+    sourceWebpMobile.type = 'image/webp';
+    sourceWebpMobile.media = '(max-width: 45em)';
+    sourceWebpMobile.srcset = `${variant.webp.small} 480w, ${variant.webp.medium} 800w`;
+    sourceWebpMobile.sizes = '90vw';
+    picture.appendChild(sourceWebpMobile);
+
+    const sourceWebpDesktop = document.createElement('source');
+    sourceWebpDesktop.type = 'image/webp';
+    sourceWebpDesktop.media = '(min-width: 45em)';
+    sourceWebpDesktop.srcset = `${variant.webp.medium} 800w, ${variant.webp.large} 1200w`;
+    sourceWebpDesktop.sizes = '60vw';
+    picture.appendChild(sourceWebpDesktop);
 
     const img = document.createElement('img');
     img.src = variant.jpeg.large;
@@ -222,7 +230,7 @@ imageVariants.forEach((variant, idx) => {
     carouselTrack.appendChild(createSlide(variant, idx));
 });
 
-// Клон первого слайда — в самый конец
+// Клон первого слайда -- в самый конец
 const firstClone = createSlide(imageVariants[0], 0);
 carouselTrack.appendChild(firstClone);
 
